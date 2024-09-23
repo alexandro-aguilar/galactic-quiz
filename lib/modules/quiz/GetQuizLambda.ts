@@ -7,17 +7,20 @@ import { HttpMethod, HttpRoute, HttpRouteKey, IHttpApi } from 'aws-cdk-lib/aws-a
 import { Construct } from 'constructs';
 
 export class GetQuizLambda {
-  private readonly name = 'GetQuizLambda';
+  private readonly name = 'GetQuiz';
 
   constructor(scope: Construct, role: Role, apiGateway: IHttpApi) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_20_X,
-      entry: path.join(__dirname, '../../../lambda/index.ts'),
+      entry: path.join(__dirname, '../../../app/modules/quiz/get/GetQuizHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       architecture: Architecture.ARM_64,
       bundling: {
-        externalModules: ['aws-sdk'], // Exclude specific modules from bundling
+        externalModules: [
+          'aws-sdk',
+          '@aws-sdk'
+        ], // Exclude specific modules from bundling
         nodeModules: [],     // Include specific modules in the bundle
         target: 'node20',    // Set the target environment for esbuild
         sourceMap: true,
@@ -30,7 +33,7 @@ export class GetQuizLambda {
 
     new HttpRoute(scope, `${this.name}Route`, {
       httpApi: apiGateway,
-      routeKey: HttpRouteKey.with('/quiz', HttpMethod.GET),
+      routeKey: HttpRouteKey.with('/quiz/{type}', HttpMethod.GET),
       integration
     });
   }

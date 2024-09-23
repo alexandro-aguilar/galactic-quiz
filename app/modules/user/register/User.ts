@@ -1,7 +1,6 @@
 export default class User {
   private _email: string;
   private _profile: number;
-  private _score?: number;
 
   constructor(email: string, profile: number) {
     this._email = email;

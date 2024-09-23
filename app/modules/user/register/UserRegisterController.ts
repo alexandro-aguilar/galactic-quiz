@@ -1,12 +1,11 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import User from './User';
 import UserRegisterRepository from './UserRegisterRepository';
-import UserRegisterRequestDTO from './UserRegisterRequestDTO';
 import HttpStatusCode from '../../../utils/httpStatusCode';
 
 export default class UserRegisterController {
   constructor(
-    private userRegisterRepository = new UserRegisterRepository()
+    private readonly userRegisterRepository = new UserRegisterRepository()
   ) {}
 
   async execute(request: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> {
