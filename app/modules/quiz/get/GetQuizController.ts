@@ -10,11 +10,10 @@ export default class GetQuizController {
 
   async execute(request: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> {
     const type: number = request.pathParameters?.type as unknown as number ?? 1;
-    await this.getQuizRepository.execute(1);
-
+    const quiz: Quiz = await this.getQuizRepository.execute(type);
     return {
       statusCode: HttpStatusCode.OK,
-      body: 'quiz'
+      body: JSON.stringify(quiz)
     }
   }
 }
