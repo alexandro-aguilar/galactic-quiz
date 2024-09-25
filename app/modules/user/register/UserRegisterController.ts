@@ -14,8 +14,7 @@ export default class UserRegisterController {
     const registrationResponse: Boolean = await this.userRegisterRepository.execute(user);
 
     return {
-      statusCode: registrationResponse ? HttpStatusCode.CREATED : HttpStatusCode.OK,
-      body: JSON.stringify('Ok'),
+      statusCode: registrationResponse ? HttpStatusCode.CREATED : HttpStatusCode.OK
     };
   }
 }

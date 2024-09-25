@@ -14,4 +14,11 @@ export default class Answer {
   get text(): string {
     return this._text;
   }
+
+  toJson() {
+    return {
+      id: this._id,
+      text: this._text
+    }
+  }
 }

@@ -34,4 +34,14 @@ export default class Question {
   get rightAnswer(): number {
     return this._rightAnswer;
   }
+
+  toJson() {
+    return {
+      id: this._id,
+      type: this._type,
+      text: this._text,
+      answers: this._answers.map(answer => answer.toJson()),
+      rightAnswer: this._rightAnswer
+    }
+  }
 }

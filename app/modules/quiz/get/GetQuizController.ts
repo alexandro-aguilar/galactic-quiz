@@ -13,7 +13,7 @@ export default class GetQuizController {
     const quiz: Quiz = await this.getQuizRepository.execute(type);
     return {
       statusCode: HttpStatusCode.OK,
-      body: JSON.stringify(quiz)
+      body: JSON.stringify(quiz.toJson())
     }
   }
 }

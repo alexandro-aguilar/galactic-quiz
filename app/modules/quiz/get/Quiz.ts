@@ -13,7 +13,13 @@ export default class Quiz {
     return this._questions;
   }
 
-  static fromFile(rawQuestions: Array<QuizQuestionsDTO>): Quiz {
+  toJson() {
+    return {
+      questions: this.questions.map(question => question.toJson())
+    }
+  }
+
+  static fromJson(rawQuestions: Array<QuizQuestionsDTO>): Quiz {
     const randomQuestions = this.getRandomItemsWithoutRepetition(rawQuestions, 5);
     const questions: Array<Question> = randomQuestions.map(
       question => {
