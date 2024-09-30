@@ -1,0 +1,362 @@
+[
+    {
+        "id": 1,
+        "text": "You host a static website in an S3 bucket and there are global clients from multiple regions. You want to use an AWS service to store cache for frequently accessed content so that the latency is reduced and the data transfer rate is increased. Which of the following options would you choose?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Use AWS SDKs to horizontally scale parallel requests to the Amazon S3 service endpoints."
+            },
+            {
+                "id": 2,
+                "text": "Create multiple Amazon S3 buckets and put Amazon EC2 and S3 in the same AWS Region."
+            },
+            {
+                "id": 3,
+                "text": "Enable Cross-Region Replication to several AWS Regions to serve customers from different locations."
+            },
+            {
+                "id": 4,
+                "text": "Configure CloudFront to deliver the content in the S3 bucket."
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 2
+    },
+    {
+        "id": 2,
+        "text": "Your company has an online game application deployed in an Auto Scaling group. The traffic of the application is predictable. Every Friday, the traffic starts to increase, remains high on weekends and then drops on Monday. You need to plan the scaling actions for the Auto Scaling group. Which method is the most suitable for the scaling policy?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Configure a scheduled CloudWatch event rule to launch/terminate instances at the specified time every week."
+            },
+            {
+                "id": 2,
+                "text": "Create a predefined target tracking scaling policy based on the average CPU metric and the ASG will scale automatically."
+            },
+            {
+                "id": 3,
+                "text": "Select the ASG and on the Automatic Scaling tab, add a step scaling policy to automatically scale-out/in at fixed time every week."
+            },
+            {
+                "id": 4,
+                "text": "Configure a scheduled action in the Auto Scaling group by specifying the recurrence, start/end time, capacities, etc."
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 2
+    },
+    {
+        "id": 3,
+        "text": "When creating an AWS CloudFront distribution, which of the following is not an origin?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Elastic Load Balancer"
+            },
+            {
+                "id": 2,
+                "text": "AWS S3 bucket"
+            },
+            {
+                "id": 3,
+                "text": "AWS MediaPackage channel endpoint"
+            },
+            {
+                "id": 4,
+                "text": "AWS Lambda"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 2
+    },
+    {
+        "id": 4,
+        "text": "Your organization is building a collaboration platform for which they chose AWS EC2 for web and application servers and MySQL RDS instance as the database. Due to the nature of the traffic to the application, they would like to increase the number of connections to RDS instances. How can this be achieved?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Login to RDS instance and modify database config file under /etc/mysql/my.cnf"
+            },
+            {
+                "id": 2,
+                "text": "Create a new parameter group, attach it to the DB instance and change the setting."
+            },
+            {
+                "id": 3,
+                "text": "Create a new option group, attach it to the DB instance and change the setting."
+            },
+            {
+                "id": 4,
+                "text": "Modify setting in the default options group attached to the DB instance."
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 2
+    },
+    {
+        "id": 5,
+        "text": "You had set up an internal HTTP(S) Elastic Load Balancer to route requests to two EC2 instances inside a private VPC. However, one of the target EC2 instances is showing Unhealthy status. Which of the following options could not be a reason for this?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Port 80/443 is not allowed on EC2 instance’s Security Group from the load balancer."
+            },
+            {
+                "id": 2,
+                "text": "An EC2 instance is in different availability zones than load balancer."
+            },
+            {
+                "id": 3,
+                "text": "The ping path does not exist on the EC2 instance."
+            },
+            {
+                "id": 4,
+                "text": "The target did not return a successful response code."
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 2
+    },
+    {
+        "id": 6,
+        "text": "You have successfully set up a VPC peering connection in your account between two VPCs – VPC A and VPC B, each in a different region. When you are trying to make a request from VPC A to VPC B, the request fails. Which of the following could be a reason?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Cross-region peering is not supported in AWS"
+            },
+            {
+                "id": 2,
+                "text": "CIDR blocks of both VPCs might be overlapping."
+            },
+            {
+                "id": 3,
+                "text": "Routes not configured in route tables for peering connections."
+            },
+            {
+                "id": 4,
+                "text": "VPC A security group default outbound rules not allowing traffic to VPC B IP range."
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 2
+    },
+    {
+        "id": 7,
+        "text": "You are a solutions architect working for a media company that produces stock images and videos for sale via a mobile app and website. Your app and website allow users to gain access only to stock content they have purchased. Your content is stored in S3 buckets. You need to restrict access to multiple files that your users have purchased. Also, due to the nature of the stock content (purchasable by multiple users), you don’t want to change the URLs of each stock item. Which access control option best fits your scenario?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Use CloudFront signed URLs"
+            },
+            {
+                "id": 2,
+                "text": "Use S3 Presigned URLs"
+            },
+            {
+                "id": 3,
+                "text": "Use CloudFront Signed Cookies"
+            },
+            {
+                "id": 4,
+                "text": "Use S3 Signed Cookies"
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 2
+    },
+    {
+        "id": 8,
+        "text": "You are creating a new architecture for a financial firm. The architecture consists of some EC2 instances with the same type and size (M5.large). In this architecture, all the EC2 mostly communicate with each other. Business people have asked you to create this architecture keeping in mind low latency as a priority. Which placement group option could you suggest for the instances?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Partition Placement Group"
+            },
+            {
+                "id": 2,
+                "text": "Clustered Placement Group"
+            },
+            {
+                "id": 3,
+                "text": "Spread Placement Group"
+            },
+            {
+                "id": 4,
+                "text": "Enhanced Networking Placement Group"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 2
+    },
+    {
+        "id": 9,
+        "text": "You currently have your EC2 instances running in multiple availability zones in an AWS region. You need to create NAT gateways for your private instances to access the internet. How would you set up the NAT gateways so that they are highly available?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Create two NAT Gateways and place them behind an ELB"
+            },
+            {
+                "id": 2,
+                "text": "Create a NAT Gateway in each Availability Zone"
+            },
+            {
+                "id": 3,
+                "text": "Create a NAT Gateway in another region"
+            },
+            {
+                "id": 4,
+                "text": "Use Auto Scaling groups to scale the NAT Gateways"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 2
+    },
+    {
+        "id": 10,
+        "text": "A large amount of structured data is stored in Amazon S3 using the JSON format. You need to use a service to analyze the S3 data directly with standard SQL. In the meantime, the data should be easily visualized through data dashboards. Which of the following services is the most appropriate?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Amazon Athena and Amazon QuickSight"
+            },
+            {
+                "id": 2,
+                "text": "AWS Glue and Amazon Athena"
+            },
+            {
+                "id": 3,
+                "text": "AWS Glue and Amazon QuickSight"
+            },
+            {
+                "id": 4,
+                "text": "Amazon Kinesis Data Stream and Amazon QuickSight"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 2
+    },
+    {
+        "id": 11,
+        "text": "A financial institute has deployed a critical web application in the AWS cloud. The management team is looking for a resilient solution with RTO/RPO in ten minutes during a disaster. They have budget concerns, and the cost of provisioning the backup infrastructure should not be very high. As a solution architect, you have been assigned to work on setting a resilient solution meeting the RTO/RPO requirements within the cost constraints. Which strategy is suited perfectly?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Multi-Site Active/Active"
+            },
+            {
+                "id": 2,
+                "text": "Warm Standby"
+            },
+            {
+                "id": 3,
+                "text": "Backup & Restore"
+            },
+            {
+                "id": 4,
+                "text": "Pilot Light"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 2
+    },
+    {
+        "id": 12,
+        "text": "A company is using microservices-based applications using Amazon ECS for an online shopping application. For different services, multiple tasks are created in a container using the EC2 launch type. The security team is looking for some specific security controls for the tasks in the containers along with granular network monitoring using various tools for each task. What networking mode configuration can be considered with Amazon ECS to meet this requirement?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Use host networking mode for Amazon ECS tasks."
+            },
+            {
+                "id": 2,
+                "text": "By default, an elastic network interface (ENI) with a primary private IP address is assigned to each task."
+            },
+            {
+                "id": 3,
+                "text": "Use awsvpc networking mode for Amazon ECS tasks."
+            },
+            {
+                "id": 4,
+                "text": "Use bridge networking mode for Amazon ECS tasks."
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 2
+    },
+    {
+        "id": 13,
+        "text": "A start-up firm is planning to deploy container-based applications using Amazon ECS. The firm is looking for the least latency from on-premises networks to the workloads in the containers. The proposed solution should be scalable and should support consistent high CPU and memory requirements. What deployment can be implemented for this purpose?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Create a Fargate launch type with Amazon ECS and deploy it in the AWS Outpost."
+            },
+            {
+                "id": 2,
+                "text": "Create a Fargate launch type with Amazon ECS and deploy it in the AWS Local Zone."
+            },
+            {
+                "id": 3,
+                "text": "Create an EC2 launch type with Amazon ECS and deploy it in the AWS Local Zone."
+            },
+            {
+                "id": 4,
+                "text": "Create an EC2 launch type with Amazon ECS and deploy it in the AWS Outpost."
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 2
+    },
+    {
+        "id": 14,
+        "text": "A static website named ‘whizexample’ is hosted using the Amazon S3 bucket. JavaScript on the web pages stored in the Amazon S3 bucket needs to make authenticated GET requests to the bucket using the Amazon S3 API endpoint for the bucket, example.s3.us-west-1.amazonaws.com. What additional configuration will be required for allowing this access?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Create CORS configuration with Access-Control-Request-Header as GET using JSON and add CORS configuration to the bucket from the S3 console."
+            },
+            {
+                "id": 2,
+                "text": "Create CORS configuration with Access-Control-Request-Method as GET using JSON and add CORS configuration to the bucket from the S3 console."
+            },
+            {
+                "id": 3,
+                "text": "Create CORS configuration with Access-Control-Request-Method as GET using XML and add CORS configuration to the bucket from the S3 console."
+            },
+            {
+                "id": 4,
+                "text": "Create CORS configuration with Access-Control-Request-Header as GET using XML and add CORS configuration to the bucket from the S3 console."
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 2
+    },
+    {
+        "id": 15,
+        "text": "A critical application deployed in AWS Cloud requires maximum availability to avoid any outages. The project team has already deployed all resources in multiple regions with redundancy at all levels. They are concerned about the configuration of Amazon Route 53 for this application which should complement higher availability and reliability. Route 53 should be configured to use failover resources during a disaster. What solution can be implemented with Amazon Route 53 for maximum availability and increased reliability?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Associate multiple IP endpoints in different regions to Route 53 hostname. Use a weighted route policy to change the weights of the primary and failover resources. So, all traffic is diverted to failover resources during a disaster."
+            },
+            {
+                "id": 2,
+                "text": "Create two sets of public-hosted zones for resources in multiple regions. During a disaster, update Route 53 public-hosted zone records to point to a healthy endpoint."
+            },
+            {
+                "id": 3,
+                "text": "Create two sets of private hosted zones for resources in multiple regions. During a disaster, update Route 53 private hosted zone records to point to a healthy endpoint."
+            },
+            {
+                "id": 4,
+                "text": "Associate multiple IP endpoints in different regions to Route 53 hostname. Using health checks, configure Route 53 to automatically failover to healthy endpoints during a disaster."
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 2
+    }
+]

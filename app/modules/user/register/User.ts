@@ -1,8 +1,10 @@
+import Types from '../../../utils/types';
+
 export default class User {
   private _email: string;
-  private _profile: number;
+  private _profile: Types;
 
-  constructor(email: string, profile: number) {
+  constructor(email: string, profile: Types) {
     this._email = email;
     this._profile = profile;
   }
@@ -11,16 +13,8 @@ export default class User {
     return this._email;
   }
 
-  set email(email: string) {
-    this._email = email;
-  }
-
-  get profile(): number {
+  get profile(): Types {
     return this._profile;
-  }
-
-  set profile(profile: number) {
-    this._profile = profile;
   }
 
   toJSON(): object {

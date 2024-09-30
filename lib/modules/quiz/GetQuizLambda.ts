@@ -3,13 +3,13 @@ import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Role } from 'aws-cdk-lib/aws-iam';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import { HttpMethod, HttpRoute, HttpRouteKey, IHttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
+import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
 
 export class GetQuizLambda {
   private readonly name = 'GetQuiz';
 
-  constructor(scope: Construct, role: Role, apiGateway: IHttpApi) {
+  constructor(scope: Construct, role: Role, apiGateway: HttpApi) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_20_X,
       entry: path.join(__dirname, '../../../app/modules/quiz/get/GetQuizHandler.ts'),

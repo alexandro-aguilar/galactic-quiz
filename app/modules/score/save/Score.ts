@@ -3,8 +3,8 @@ export default class Score {
   private _score: number;
 
   constructor(email: string, score: number) {
-    this._email = email,
-    this._score = score
+    this._email = email;
+    this._score = score;
   }
 
   get email(): string {

@@ -1,4 +1,4 @@
-import { HttpMethod, HttpRoute, HttpRouteKey, IHttpApi } from "aws-cdk-lib/aws-apigatewayv2";
+import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from "aws-cdk-lib/aws-apigatewayv2";
 import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
 import { Role } from "aws-cdk-lib/aws-iam";
 import { Runtime, Architecture } from "aws-cdk-lib/aws-lambda";
@@ -9,7 +9,7 @@ import path = require("path");
 export default class SaveScoreLambda {
   private readonly name = 'SaveScore';
 
-  constructor(scope: Construct, role: Role, apiGateway: IHttpApi) {
+  constructor(scope: Construct, role: Role, apiGateway: HttpApi) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_20_X,
       entry: path.join(__dirname, '../../../app/modules/score/save/SaveScoreHandler.ts'),
