@@ -1,6 +1,6 @@
 import path = require('path');
 import { Construct } from 'constructs';
-import { Role } from 'aws-cdk-lib/aws-iam';
+import { Policy, PolicyStatement, Role } from 'aws-cdk-lib/aws-iam';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Runtime, Architecture } from 'aws-cdk-lib/aws-lambda';
 import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
@@ -28,6 +28,19 @@ export default class RegisterUserLambda {
       },
       role
     });
+
+    // Create an inline policy for DynamoDB PutItem access
+    const dynamoPutItemPolicy = new Policy(scope, 'DynamoPutItemPolicy', {
+      statements: [
+        new PolicyStatement({
+          actions: ['dynamodb:PutItem'],
+          resources: ['arn:aws:dynamodb:us-east-1:058632605534:table/ComDayUsers'],
+        }),
+      ],
+    });
+
+    // Attach the DynamoDB access policy to the Lambda function's role
+    lambda.role?.attachInlinePolicy(dynamoPutItemPolicy);
 
     const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
 
