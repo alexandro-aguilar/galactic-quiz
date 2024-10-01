@@ -30,7 +30,7 @@ export default class RegisterUserLambda {
     });
 
     // Create an inline policy for DynamoDB PutItem access
-    const dynamoPutItemPolicy = new Policy(scope, 'DynamoPutItemPolicy', {
+    const dynamoPutItemPolicy = new Policy(scope, `${this.name}LambdaDynamoPutItemPolicy`, {
       statements: [
         new PolicyStatement({
           actions: ['dynamodb:PutItem'],

@@ -1,6 +1,6 @@
 import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from "aws-cdk-lib/aws-apigatewayv2";
 import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
-import { Role } from "aws-cdk-lib/aws-iam";
+import { Policy, PolicyStatement, Role } from "aws-cdk-lib/aws-iam";
 import { Runtime, Architecture } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
@@ -17,7 +17,10 @@ export default class SaveScoreLambda {
       memorySize: 1024,
       architecture: Architecture.ARM_64,
       bundling: {
-        externalModules: ['aws-sdk'], // Exclude specific modules from bundling
+        externalModules: [
+          'aws-sdk',
+          '@aws-sdk'
+        ], // Exclude specific modules from bundling
         nodeModules: [],     // Include specific modules in the bundle
         target: 'node20',    // Set the target environment for esbuild
         sourceMap: true,
@@ -25,6 +28,19 @@ export default class SaveScoreLambda {
       },
       role
     });
+
+    // Create an inline policy for DynamoDB PutItem access
+    const dynamoUpdateItemPolicy = new Policy(scope, `${this.name}LambdaDynamoUpdateItemPolicy`, {
+      statements: [
+        new PolicyStatement({
+          actions: ['dynamodb:UpdateItem'],
+          resources: ['arn:aws:dynamodb:us-east-1:058632605534:table/ComDayUsers'],
+        }),
+      ],
+    });
+
+    // Attach the DynamoDB access policy to the Lambda function's role
+    lambda.role?.attachInlinePolicy(dynamoUpdateItemPolicy);
 
     const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
 

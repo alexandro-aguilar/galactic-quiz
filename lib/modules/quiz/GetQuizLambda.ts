@@ -30,7 +30,7 @@ export class GetQuizLambda {
     });
 
     //S3 access policy
-    const s3AccessPolicy = new Policy(scope, 'S3AccessPolicy', {
+    const s3AccessPolicy = new Policy(scope, `${this.name}LambdaS3AccessPolicy`, {
       statements: [
         new PolicyStatement({
           actions: ['s3:GetObject'],
