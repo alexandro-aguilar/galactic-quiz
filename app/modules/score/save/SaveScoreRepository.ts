@@ -10,19 +10,28 @@ export default class SaveScoreRepository {
     this.client = DynamoDBDocumentClient.from(client);
   }
 
-  async execute(score: Score): Promise<void> {
-    const command = new UpdateCommand({
-      TableName: 'ComDayUsers',
-      Key: {
-        email: score.email
-      },
-      UpdateExpression: 'set score = :score',
-      ExpressionAttributeValues: {
-        ':score': score.score
-      },
-      ReturnValues: 'ALL_NEW'
-    });
-
-    const response = await this.client.send(command);
+  async execute(score: Score): Promise<boolean> {
+    try {
+      const command = new UpdateCommand({
+        TableName: 'ComDayUsers',
+        Key: {
+          email: score.email
+        },
+        UpdateExpression: 'set score = :score',
+        ExpressionAttributeValues: {
+          ':score': score.score
+        },
+        ConditionExpression: 'attribute_not_exists(score)',
+        ReturnValues: 'NONE'
+      });
+  
+      await this.client.send(command);
+      return true;
+    } catch(error: any) {
+      if (error.name === 'ConditionalCheckFailedException') {
+        return false;
+      }
+      throw error;
+    }
   }
 }
