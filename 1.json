@@ -1,338 +1,362 @@
 [
-  {
-    "id": 1,
-    "text": "pregunta",
-    "answers": [
-      {
+    {
         "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
+        "text": "An Application logging shows 5xx HTTP response codes that occur at irregular intervals. The errors are affecting users. How could the application improve its resiliency?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Revise the request content in the application code."
+            },
+            {
+                "id": 2,
+                "text": "Use the AWS SDK for Java to interact with AWS APIs."
+            },
+            {
+                "id": 3,
+                "text": "Scale out the application so that more instances of the application are running."
+            },
+            {
+                "id": 4,
+                "text": "Add additional logging to the application code."
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 1
+    },
+    {
         "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
+        "text": "You're building an application that runs behind an Application Load Balancer (ALB). The ALB is configured as the origin for an Amazon CloudFront distribution. Users will log in to the application by using their social media accounts. How can the developer authenticate users?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Validate the users by inspecting the tokens in an AWS Lambda authorizer on the ALB."
+            },
+            {
+                "id": 2,
+                "text": "Configure the ALB to use Amazon Cognito as one of the authentication providers."
+            },
+            {
+                "id": 3,
+                "text": "Configure CloudFront to use Amazon Cognito as one of the authentication providers."
+            },
+            {
+                "id": 4,
+                "text": "Validate the users by calling the Amazon Cognito API in an AWS Lambda authorizer on the ALB."
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 1
+    },
+    {
         "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
+        "text": "Your application uses Amazon Cognito user pools as an identity provider. The company must secure access to user records. It has set up multi-factor authentication (MFA) and wants to send an email notification of login activity every time a user logs in. What is the most operationally efficient solution that meets this requirement?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Create an AWS Lambda function that uses Amazon Simple Email Service (Amazon SES) to send the email notification. Add an Amazon API Gateway API to invoke the function. Call the API from the client side when login confirmation is received."
+            },
+            {
+                "id": 2,
+                "text": "Create an AWS Lambda function that uses Amazon Simple Email Service (Amazon SES) to send the email notification. Add an Amazon Cognito post authentication Lambda trigger for the function."
+            },
+            {
+                "id": 3,
+                "text": "Create an AWS Lambda function that uses Amazon Simple Email Service (Amazon SES) to send the email notification. Create an Amazon CloudWatch Logs log subscription filter to invoke the function based on the login status."
+            },
+            {
+                "id": 4,
+                "text": "Configure Amazon Cognito to stream all logs to Amazon Kinesis Data Firehose. Create an AWS Lambda function to process the streamed logs and to send the email notification based on the login status of each user."
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 1
+    },
+    {
         "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 2,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 3,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 4,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 5,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 6,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 7,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 8,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 9,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 10,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 11,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 12,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 13,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  },
-  {
-    "id": 14,
-    "text": "pregunta",
-    "answers": [
-      {
-        "id": 1,
-        "text": "rspuesta 1"
-      },
-      {
-        "id": 2,
-        "text": "rspuesta 2"
-      },
-      {
-        "id": 3,
-        "text": "rspuesta 3"
-      },
-      {
-        "id": 4,
-        "text": "rspuesta 4"
-      }
-    ],
-    "rightAnswer": 2,
-    "type": 1
-  }
+        "text": "You've been asked to create an application that can be deployed across a fleet of EC2 instances. The configuration must allow full control over the deployment steps using the blue-green deployment. Which service will help you achieve that?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "CodeBuild"
+            },
+            {
+                "id": 2,
+                "text": "CodePipeline"
+            },
+            {
+                "id": 3,
+                "text": "Elastic Beanstalk"
+            },
+            {
+                "id": 4,
+                "text": "CodeDeploy"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 1
+    },
+    {
+        "id": 5,
+        "text": "Your company is migrating its on-premises database to Amazon RDS for PostgreSQL. The company has read-heavy workloads. The development team at the company is looking at refactoring the code to achieve optimum read performance for SQL queries. Which solution will address this requirement with the least current as well as future development effort?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Set up Amazon RDS with one or more read replicas. Refactor the application code so that the queries use the endpoint for the read replicas"
+            },
+            {
+                "id": 2,
+                "text": "Configure Elasticache for Memcached to act as a caching layer for Amazon RDS. Refactor the application code so that the queries use the Elasticache for Memcached endpoint"
+            },
+            {
+                "id": 3,
+                "text": "Configure Elasticache for Redis to act as a caching layer for Amazon RDS. Refactor the application code so that the queries use the Elasticache for Redis endpoint"
+            },
+            {
+                "id": 4,
+                "text": "Set up Amazon RDS in the multi-AZ configuration with a single standby instance. Refactor the application code so that the queries use the standby instance endpoint"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 1
+    },
+    {
+        "id": 6,
+        "text": "Your development team wants to build an application using serverless architecture. To achieve this goal, the team plans to use AWS Lambda functions extensively. The team's developers work with different programming languages, such as Python, .NET, and Javascript. The team wants to model the cloud infrastructure using any of these programming languages. Which AWS service/tool should the team use for the given use case?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "AWS CodeDeploy"
+            },
+            {
+                "id": 2,
+                "text": "AWS Serverless Application Model (SAM)"
+            },
+            {
+                "id": 3,
+                "text": "AWS CloudFormation"
+            },
+            {
+                "id": 4,
+                "text": "AWS Cloud Development Kit (CDK)"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 1
+    },
+    {
+        "id": 7,
+        "text": "You are storing score information on your gaming application and would like to expire DynamoDB table data automatically after one week. What should you use?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Use DynamoDB Streams"
+            },
+            {
+                "id": 2,
+                "text": "Use TTL"
+            },
+            {
+                "id": 3,
+                "text": "Use DAX"
+            },
+            {
+                "id": 4,
+                "text": "Use a Lambda function"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 1
+    },
+    {
+        "id": 8,
+        "text": "Your company has multiple business units, each with its own AWS account. The development team would like to debug and trace data across accounts and visualize it in a centralized account. Which of the following solutions would you suggest for the given use case?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "CloudTrail"
+            },
+            {
+                "id": 2,
+                "text": "CloudWatch Events"
+            },
+            {
+                "id": 3,
+                "text": "X-Ray"
+            },
+            {
+                "id": 4,
+                "text": "VPC Flow Logs"
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 1
+    },
+    {
+        "id": 9,
+        "text": "What steps can a developer take to optimize the performance of a CPU-bound AWS Lambda function and ensure fast response time?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Increase the function's timeout"
+            },
+            {
+                "id": 2,
+                "text": "Increase the function's provisioned concurrency"
+            },
+            {
+                "id": 3,
+                "text": "Increase the function's memory"
+            },
+            {
+                "id": 4,
+                "text": "Increase the function's CPU"
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 1
+    },
+    {
+        "id": 10,
+        "text": "A development team is working on an AWS Lambda function that accesses DynamoDB. The Lambda function must do an upsert, that is, it must retrieve an item and update some of its attributes or create the item if it does not exist. Which of the following represents the solution with MINIMUM IAM permissions that can be used for the Lambda function to achieve this functionality?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "dynamodb:UpdateItem, dynamodb:GetItem"
+            },
+            {
+                "id": 2,
+                "text": "dynamodb:AddItem, dynamodb:GetItem"
+            },
+            {
+                "id": 3,
+                "text": "dynamodb:GetRecords, dynamodb:PutItem, dynamodb:UpdateTable"
+            },
+            {
+                "id": 4,
+                "text": "dynamodb:UpdateItem, dynamodb:GetItem, dynamodb:PutItem"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 1
+    },
+    {
+        "id": 11,
+        "text": "After a code review, a developer has been asked to make his publicly accessible S3 buckets private, and enable access to objects with a time-bound constraint. Which of the following options will address the given use-case?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Use Routing policies to re-route unintended access"
+            },
+            {
+                "id": 2,
+                "text": "Use Bucket policy to block the unintended access"
+            },
+            {
+                "id": 3,
+                "text": "Share pre-signed URLs with resources that need access"
+            },
+            {
+                "id": 4,
+                "text": "It is not possible to implement time constraints on Amazon S3 Bucket access"
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 1
+    },
+    {
+        "id": 12,
+        "text": "Recently in your organization, the AWS X-Ray SDK was bundled into each Lambda function to record outgoing calls for tracing purposes. When your team leader goes to the X-Ray service in the AWS Management Console to get an overview of the information collected, they discover that no data is available. What is the most likely reason for this issue?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Enable X-Ray sampling"
+            },
+            {
+                "id": 2,
+                "text": "Change the security group rules"
+            },
+            {
+                "id": 3,
+                "text": "X-Ray only works with AWS Lambda aliases"
+            },
+            {
+                "id": 4,
+                "text": "Fix the IAM Role"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 1
+    },
+    {
+        "id": 13,
+        "text": "The company needs a cost-effective solution to handle and analyze large volumes of real-time data. What technology or service should it use for this purpose?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Amazon Kinesis Firehose"
+            },
+            {
+                "id": 2,
+                "text": "Amazon Kinesis Data Streams"
+            },
+            {
+                "id": 3,
+                "text": "AWS Glue"
+            },
+            {
+                "id": 4,
+                "text": "Amazon Simple Queue Service (SQS)"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 1
+    },
+    {
+        "id": 14,
+        "text": "Your company has a three-year contract with a healthcare provider. The contract states that monthly database backups must be retained for the duration of the contract for compliance purposes. Currently, the limit on backup retention for automated backups, on Amazon Relational Database Service (RDS), does not meet your requirements. Which of the following solutions can help you meet your requirements?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Enable RDS Multi-AZ"
+            },
+            {
+                "id": 2,
+                "text": "Create a cron event in CloudWatch, which triggers an AWS Lambda function that triggers the database snapshot"
+            },
+            {
+                "id": 3,
+                "text": "Enable RDS automatic backups"
+            },
+            {
+                "id": 4,
+                "text": "Enable RDS Read replicas"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 1
+    },
+    {
+        "id": 15,
+        "text": "A company wants to automate and orchestrate a multi-source high-volume flow of data in a scalable data management solution built using AWS services. The solution must ensure that the business rules and transformations run in sequence, handle reprocessing of data in case of errors, and require minimal maintenance. Which AWS service should the company use to manage and automate the orchestration of the data flows?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Amazon Kinesis Data Streams"
+            },
+            {
+                "id": 2,
+                "text": "AWS Step Functions"
+            },
+            {
+                "id": 3,
+                "text": "AWS Glue"
+            },
+            {
+                "id": 4,
+                "text": "AWS Batch"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 1
+    }    
 ]

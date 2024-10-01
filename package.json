@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/CdkLambdaTemplateStack.template.json"
+    "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/ComDay2024.template.json"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.145",
