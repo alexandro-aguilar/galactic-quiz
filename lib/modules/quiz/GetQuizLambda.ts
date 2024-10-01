@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Role } from 'aws-cdk-lib/aws-iam';
+import { Policy, PolicyStatement, Role } from 'aws-cdk-lib/aws-iam';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
@@ -28,6 +28,18 @@ export class GetQuizLambda {
       },
       role
     });
+
+    //S3 access policy
+    const s3AccessPolicy = new Policy(scope, 'S3AccessPolicy', {
+      statements: [
+        new PolicyStatement({
+          actions: ['s3:GetObject'],
+          resources: ['arn:aws:s3:::com-day-questions/*'], // Replace 'your-bucket-name' with the name of your bucket
+        }),
+      ],
+    });
+
+    lambda.role?.attachInlinePolicy(s3AccessPolicy);
 
     const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
 
