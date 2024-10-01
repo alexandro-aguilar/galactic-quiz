@@ -24,6 +24,5 @@ export default class SaveScoreRepository {
     });
 
     const response = await this.client.send(command);
-    console.log('dynamo response', response)
   }
 }
