@@ -14,7 +14,10 @@ export default class GetQuizController {
     //Todo: rephrase with genai
     return {
       statusCode: HttpStatusCode.OK,
-      body: JSON.stringify(quiz.toJson())
+      body: JSON.stringify(quiz.toJson()),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }
     }
   }
 }
