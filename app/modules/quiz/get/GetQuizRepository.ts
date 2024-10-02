@@ -1,14 +1,18 @@
 import Quiz from './Quiz';
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import QuizQuestionsDTO from './QuizQuestionsDTO';
+import ParaphraseRepository from './ParaphraseRepository';
 
 export default class GetQuizRepository {
+  
   private readonly client: S3Client;
   private readonly bucket: string;
+  private readonly paraphraseRepository: ParaphraseRepository;
 
   constructor() {
     this.client = new S3Client({ region: 'us-east-1' });
     this.bucket = 'com-day-questions';
+    this.paraphraseRepository = new ParaphraseRepository();
   }
 
   async execute(type: number): Promise<Quiz> {
@@ -22,7 +26,8 @@ export default class GetQuizRepository {
       const file = await response.Body?.transformToString() as string;
       const questions: Array<QuizQuestionsDTO> = JSON.parse(file);
       const quiz = Quiz.fromObject(questions);
-      return quiz;
+      const paraphrasedQuiz = await this.paraphraseRepository.execute(quiz.questions);
+      return paraphrasedQuiz;
     } catch (error) {
       console.error('Error getting object:', error);
       throw error;

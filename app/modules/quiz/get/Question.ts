@@ -27,6 +27,10 @@ export default class Question {
     return this._text;
   }
 
+  set text(text: string) {
+    this._text = text;
+  }
+
   get answers(): Array<Answer> {
     return this._answers;
   }

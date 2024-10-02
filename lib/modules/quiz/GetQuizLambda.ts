@@ -5,6 +5,7 @@ import { Policy, PolicyStatement, Role } from 'aws-cdk-lib/aws-iam';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
+import { Duration } from 'aws-cdk-lib';
 
 export class GetQuizLambda {
   private readonly name = 'GetQuiz';
@@ -15,6 +16,7 @@ export class GetQuizLambda {
       entry: path.join(__dirname, '../../../app/modules/quiz/get/GetQuizHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
+      timeout: Duration.seconds(60),
       architecture: Architecture.ARM_64,
       bundling: {
         externalModules: [
