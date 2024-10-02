@@ -1,0 +1,362 @@
+[
+    {
+        "id": 1,
+        "text": "You are a data engineer at an IT company. The company has multiple enterprise customers that manage their own mobile applications that capture and send data to Amazon Kinesis Data Streams. They have been getting a ProvisionedThroughputExceededException exception. Upon analysis, you notice that messages are being sent one by one at a high rate. Which of the following options will help with the exception while keeping costs at a minimum?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Use batch messages"
+            },
+            {
+                "id": 2,
+                "text": "Decrease the Stream retention duration"
+            },
+            {
+                "id": 3,
+                "text": "Use Exponential Backoff"
+            },
+            {
+                "id": 4,
+                "text": "Increase the number of shards"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 3
+    },
+    {
+        "id": 2,
+        "text": "A financial analytics company wants to gather insights from personal finance data stored on Amazon S3 in the Microsoft Excel workbook format. Which of the following represents a serverless solution to interactively discover, clean and transform this raw data for performing this analysis?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Leverage Amazon Athena to analyze the data stored on Amazon S3 "
+            },
+            {
+                "id": 2,
+                "text": "Leverage AWS Glue DataBrew to analyze the data stored on Amazon S3"
+            },
+            {
+                "id": 3,
+                "text": "Leverage Amazon Glue Data Catalog to analyze the data stored on Amazon S3"
+            },
+            {
+                "id": 4,
+                "text": "Leverage Amazon Redshift Spectrum to analyze the data stored on Amazon S3"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 3
+    },
+    {
+        "id": 3,
+        "text": "A photo-sharing company is storing user profile pictures in an Amazon S3 bucket and an image analysis application is deployed on four Amazon EC2 instances. A data engineer would like to trigger an image analysis procedure only on one of the four Amazon EC2 instances for each photo uploaded. What do you recommend?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Create an Amazon S3 Event Notification that sends a message to an Amazon SQS queue. Make the Amazon EC2 instances read from the Amazon SQS queue"
+            },
+            {
+                "id": 2,
+                "text": "Create an Amazon EventBridge event that reacts to object uploads in Amazon S3 and invokes one of the Amazon EC2 instances"
+            },
+            {
+                "id": 3,
+                "text": "Subscribe the Amazon EC2 instances to Amazon S3 Analytics - storage class analysis "
+            },
+            {
+                "id": 4,
+                "text": "Create an Amazon S3 Event Notification that sends a message to an Amazon SNS topic. Subscribe the Amazon EC2 instances to the Amazon SNS topic"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 3
+    },
+    {
+        "id": 4,
+        "text": "A data engineer has been tasked to optimize Amazon Athena queries that are underperforming. Upon analysis, the data engineer realized that the files queried by Athena were not compressed and just stored as .csv files. The data engineer also noticed that users perform most queries by selecting a specific column. What do you recommend to improve the query performance?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Change the data format from comma-separated text files to ZIP format"
+            },
+            {
+                "id": 2,
+                "text": "Change the data format from comma-separated text files to JSON format. Apply Snappy compression"
+            },
+            {
+                "id": 3,
+                "text": "Change the data format from comma-separated text files to Apache ORC"
+            },
+            {
+                "id": 4,
+                "text": "Change the data format from comma-separated text files to Apache Parquet. Compress the files using Snappy compression"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 3
+    },
+    {
+        "id": 5,
+        "text": "An e-commerce company is looking to enhance its product recommendation system which relies on user behavior and preferences. The company wants to achieve this by integrating insights from third-party datasets into its existing analytics platform. The company aims to minimize the effort and time involved in this integration. What solution would achieve this with the least operational overhead?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Access and integrate third-party datasets available through AWS Data Exchange"
+            },
+            {
+                "id": 2,
+                "text": "Access and integrate third-party datasets from AWS CodeCommit repositories"
+            },
+            {
+                "id": 3,
+                "text": "Access and integrate third-party datasets available through AWS Marketplace"
+            },
+            {
+                "id": 4,
+                "text": "Access and integrate third-party datasets available through AWS DataSync"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 3
+    },
+    {
+        "id": 6,
+        "text": "A company has noticed that its Amazon EBS Elastic Volume (io1) accounts for 90% of the cost and the remaining 10% cost can be attributed to the Amazon EC2 instance. The Amazon CloudWatch metrics report that both the Amazon EC2 instance and the Amazon EBS volume are under-utilized. The Amazon CloudWatch metrics also show that the Amazon EBS volume has occasional I/O bursts. The entire infrastructure is managed by AWS CloudFormation. What do you propose to reduce the costs?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Don't use an AWS CloudFormation template to create the database as the AWS CloudFormation service incurs greater service charges"
+            },
+            {
+                "id": 2,
+                "text": "Change the Amazon EC2 instance type to something much smaller"
+            },
+            {
+                "id": 3,
+                "text": "Keep the Amazon EBS volume to io1 and reduce the IOPS"
+            },
+            {
+                "id": 4,
+                "text": "Convert the Amazon EC2 instance EBS volume to gp2"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 3
+    },
+    {
+        "id": 7,
+        "text": "A big data analytics company is working on a real-time vehicle tracking solution. The data processing workflow involves both I/O-intensive and throughput-intensive database workloads. The data engineering team needs to store this real-time data in a NoSQL database hosted on an Amazon EC2 instance and needs to support up to 25,000 IOPS per volume. Which of the following Amazon Elastic Block Store (Amazon EBS) volume types would you recommend for this use-case?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Cold HDD (sc1)"
+            },
+            {
+                "id": 2,
+                "text": "Provisioned IOPS SSD (io1)"
+            },
+            {
+                "id": 3,
+                "text": "Throughput Optimized HDD (st1)"
+            },
+            {
+                "id": 4,
+                "text": "General Purpose SSD (gp2)"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 3
+    },
+    {
+        "id": 8,
+        "text": "You would like to mount a network file system on Linux instances, where files will be stored and accessed frequently at first, and then infrequently. What solution is the MOST cost-effective?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Amazon EFS Infrequent Access"
+            },
+            {
+                "id": 2,
+                "text": "Amazon S3 Glacier Deep Archive"
+            },
+            {
+                "id": 3,
+                "text": "Amazon S3 Intelligent Tiering"
+            },
+            {
+                "id": 4,
+                "text": "Amazon EBS io1/io2"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 1
+    },
+    {
+        "id": 9,
+        "text": "An online gaming application has a large chunk of its traffic coming from users who download static assets such as historic leaderboard reports and the game tactics for various games. The current infrastructure and design are unable to handle the traffic and application freezes on most of the pages. Which of the following is a cost-optimal solution that requires the LEAST operational overhead?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Use Amazon CloudFront with Amazon DynamoDB for greater speed and low latency access to static assets"
+            },
+            {
+                "id": 2,
+                "text": "Use AWS Lambda with Amazon ElastiCache and Amazon RDS for serving static assets at high speed and low latency"
+            },
+            {
+                "id": 3,
+                "text": "Configure AWS Lambda with an Amazon RDS database to provide a serverless architecture"
+            },
+            {
+                "id": 4,
+                "text": "Use Amazon CloudFront with Amazon S3 as the storage solution for the static assets"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 3
+    },
+    {
+        "id": 10,
+        "text": "A data engineer is provisioning a DynamoDB table for an e-commerce application. The engineer is planning to allocate 500 Write Capacity Units, 5000 Read Capacity Units, and 50GB of space for this table. How many partitions will be created in the table for this requirement?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "3 partitions"
+            },
+            {
+                "id": 2,
+                "text": "5 partitions"
+            },
+            {
+                "id": 3,
+                "text": "6 partitions"
+            },
+            {
+                "id": 4,
+                "text": "8 partitions"
+            }
+        ],
+        "rightAnswer": 2,
+        "type": 3
+    },
+    {
+        "id": 11,
+        "text": "A company is experimenting with DynamoDB in its new test environment. The data engineering team has discovered that some of the write operations have been overwriting existing items having that specific primary key. This has corrupted the data leading to data discrepancies. Which DynamoDB write option would you select to prevent this kind of overwriting?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Conditional writes"
+            },
+            {
+                "id": 2,
+                "text": "Scan operation"
+            },
+            {
+                "id": 3,
+                "text": "Batch writes"
+            },
+            {
+                "id": 4,
+                "text": "Atomic Counters"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 3
+    },
+    {
+        "id": 12,
+        "text": "A financial services company stores confidential data on an Amazon Simple Storage Service (S3) bucket. The compliance guidelines require that files be stored with server-side encryption. The encryption used must be Advanced Encryption Standard (AES-256) and the company does not want to manage the encryption keys. What do you recommend?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Server-side encryption with customer-provided keys (SSE-C)"
+            },
+            {
+                "id": 2,
+                "text": "Client Side Encryption"
+            },
+            {
+                "id": 3,
+                "text": "Server-side encryption with Amazon S3 managed keys (SSE-S3)"
+            },
+            {
+                "id": 4,
+                "text": "Server-side encryption with AWS KMS keys (SSE-KMS)"
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 1
+    },
+    {
+        "id": 13,
+        "text": "A data engineer has configured inbound traffic for the relevant ports in both the Security Group of the Amazon EC2 instance as well as the network access control list (network ACL) of the subnet for the Amazon EC2 instance. However, the data engineer is unable to connect to the service running on the Amazon EC2 instance. How will you fix this issue?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Security Groups are stateful, so allowing inbound traffic to the necessary ports enables the connection. Network access control list (network ACL) is stateless, so you must allow both inbound and outbound traffic"
+            },
+            {
+                "id": 2,
+                "text": "Network access control list (network ACL) is stateful, so allowing inbound traffic to the necessary ports enables the connection. Security Groups are stateless, so you must allow both inbound and outbound traffic"
+            },
+            {
+                "id": 3,
+                "text": "Rules associated with network access control list (network ACL) should never be modified from the command line. An attempt to modify rules from the command line blocks the rule and results in an erratic behavior"
+            },
+            {
+                "id": 4,
+                "text": "IAM Role defined in the Security Group is different from the IAM Role that is given access in the network access control list (network ACL)"
+            }
+        ],
+        "rightAnswer": 1,
+        "type": 3
+    },
+    {
+        "id": 14,
+        "text": "A data analytics job requires data from multiple sources like Amazon DynamoDB, Amazon RDS, and Amazon Redshift. The job is run on Amazon Athena. Which of the following is the MOST cost-effective way to join data from these sources?",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Provision an EMR cluster to join the data from all the sources. Configure Spark for Athena to run the data analysis job"
+            },
+            {
+                "id": 2,
+                "text": "Develop an AWS Glue job using Apache Spark to join the data from all the sources"
+            },
+            {
+                "id": 3,
+                "text": "Copy the data from all the sources into a single S3 bucket. Use Athena queries on the saved S3 data"
+            },
+            {
+                "id": 4,
+                "text": "Use Amazon Athena Federated Query to join the data from all data sources"
+            }
+        ],
+        "rightAnswer": 4,
+        "type": 3
+    },
+    {
+        "id": 15,
+        "text": "A data engineering team has deployed a microservice to the Amazon Elastic Container Service (Amazon ECS). The application layer is in a Docker container that provides both static and dynamic content through an Application Load Balancer. With increasing load, the Amazon ECS cluster is experiencing higher network usage. The team has looked into the network usage and found that 90% of it is due to distributing static content of the application. What do you recommend to improve the application's network usage and decrease costs??",
+        "answers": [
+            {
+                "id": 1,
+                "text": "Distribute the dynamic content through Amazon EFS"
+            },
+            {
+                "id": 2,
+                "text": "Distribute the static content through Amazon EFS"
+            },
+            {
+                "id": 3,
+                "text": "Distribute the static content through Amazon S3"
+            },
+            {
+                "id": 4,
+                "text": "Distribute the dynamic content through Amazon S3"
+            }
+        ],
+        "rightAnswer": 3,
+        "type": 3
+    }    
+]
