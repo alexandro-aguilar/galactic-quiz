@@ -50,7 +50,7 @@ export class GetQuizLambda {
           actions: [
             'bedrock:InvokeModel'
           ],
-          resources: ['arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-v2:1'], // You can specify a specific Bedrock model ARN if applicable
+          resources: ['*'], // You can specify a specific Bedrock model ARN if applicable
         }),
       ],
     });

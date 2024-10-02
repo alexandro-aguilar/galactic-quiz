@@ -17,7 +17,7 @@ export default class ParaphraseRepository {
     const contentType = 'application/json';
 
     const paraphrasedQuestions = questions.map(async question => {
-      const prompt = `Human: Paraphrase the following sentence for use in a quiz application, be as concise as possible.
+      const prompt = `Human: Paraphrase the following sentence for use in a quiz application, consider being short and concise without removing the meaning of the question.
       <text>
       ${question.text}
       </text>
