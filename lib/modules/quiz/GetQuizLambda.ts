@@ -36,12 +36,27 @@ export class GetQuizLambda {
       statements: [
         new PolicyStatement({
           actions: ['s3:GetObject'],
-          resources: ['arn:aws:s3:::com-day-questions/*'], // Replace 'your-bucket-name' with the name of your bucket
+          resources: ['arn:aws:s3:::com-day-questions/*'],
         }),
       ],
     });
 
     lambda.role?.attachInlinePolicy(s3AccessPolicy);
+
+     // Create an inline policy for Bedrock model invocation
+    const bedrockInvokePolicy = new Policy(scope, `${this.name}LambdaBedrockInvokePolicy`, {
+      statements: [
+        new PolicyStatement({
+          actions: [
+            'bedrock:InvokeModel'
+          ],
+          resources: ['arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-v2:1'], // You can specify a specific Bedrock model ARN if applicable
+        }),
+      ],
+    });
+
+    // Attach the Bedrock access policy to the Lambda function's role
+    lambda.role?.attachInlinePolicy(bedrockInvokePolicy);
 
     const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
 
