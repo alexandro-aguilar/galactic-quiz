@@ -31,7 +31,7 @@ export class GetQuizLambda {
       },
       role: props.role,
       environment: {
-        QuizBucket: props.bucket.bucketArn
+        QUIZ_BUCKET: props.bucket.bucketArn
       }
     });
 

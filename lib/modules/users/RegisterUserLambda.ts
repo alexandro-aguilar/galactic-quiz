@@ -29,7 +29,7 @@ export default class RegisterUserLambda {
       },
       role: props.role,
       environment: {
-        UsersTable: props.table.tableName
+        USERS_TABLE: props.table.tableName
       }
     });
 
