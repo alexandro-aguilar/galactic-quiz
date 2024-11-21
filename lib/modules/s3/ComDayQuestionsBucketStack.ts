@@ -18,7 +18,7 @@ export default class ComDayQuestionsBucketStack extends NestedStack {
     });
 
     new BucketDeployment(this, 'DeployFiles', {
-      sources: [Source.asset('./path-to-files')], // Path to your local files
+      sources: [Source.asset('./files')], // Path to your local files
       destinationBucket: this.bucket,
     });
   }
