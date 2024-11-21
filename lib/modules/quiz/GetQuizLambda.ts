@@ -31,7 +31,7 @@ export class GetQuizLambda {
       },
       role: props.role,
       environment: {
-        QUIZ_BUCKET: props.bucket.bucketArn
+        QUIZ_BUCKET: props.bucket.bucketName
       }
     });
 
@@ -40,7 +40,7 @@ export class GetQuizLambda {
       statements: [
         new PolicyStatement({
           actions: ['s3:GetObject'],
-          resources: [props.table.tableArn],
+          resources: [props.bucket.bucketArn],
         }),
       ],
     });
