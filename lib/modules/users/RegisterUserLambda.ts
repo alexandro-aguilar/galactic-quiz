@@ -27,7 +27,10 @@ export default class RegisterUserLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role: props.role
+      role: props.role,
+      environment: {
+        UsersTable: props.table.tableName
+      }
     });
 
     // Create an inline policy for DynamoDB PutItem access
