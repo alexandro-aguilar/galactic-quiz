@@ -29,7 +29,10 @@ export class GetQuizLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role: props.role
+      role: props.role,
+      environment: {
+        QuizBucket: props.bucket.bucketArn
+      }
     });
 
     //S3 access policy
