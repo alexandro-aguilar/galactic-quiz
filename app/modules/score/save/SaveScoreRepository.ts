@@ -1,6 +1,7 @@
 import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import Score from './Score';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import Environment from '../../../utils/Environment';
 
 export default class SaveScoreRepository {
   private readonly client: DynamoDBDocumentClient;
@@ -13,7 +14,7 @@ export default class SaveScoreRepository {
   async execute(score: Score): Promise<boolean> {
     try {
       const command = new UpdateCommand({
-        TableName: 'ComDayUsers',
+        TableName: Environment.UsersTable,
         Key: {
           email: score.email
         },

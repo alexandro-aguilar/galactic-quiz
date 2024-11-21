@@ -1,6 +1,7 @@
 import User from './User';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
+import Environment from '../../../utils/Environment';
 
 export default class UserRegisterRepository {
   private readonly client: DynamoDBDocumentClient;
@@ -12,7 +13,7 @@ export default class UserRegisterRepository {
 
   async execute(user: User): Promise<Boolean> {
     const params = {
-      TableName: 'ComDayUsers',
+      TableName: Environment.UsersTable,
       Item: user.toJSON(),
       ConditionExpression: 'attribute_not_exists(email)' // Prevent overwriting
     };

@@ -2,6 +2,7 @@ import Quiz from './Quiz';
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import QuizQuestionsDTO from './QuizQuestionsDTO';
 import ParaphraseRepository from './ParaphraseRepository';
+import Environment from '../../../utils/Environment';
 
 export default class GetQuizRepository {
   
@@ -11,7 +12,7 @@ export default class GetQuizRepository {
 
   constructor() {
     this.client = new S3Client({ region: 'us-east-1' });
-    this.bucket = 'com-day-questions';
+    this.bucket = Environment.QuizBucket;
     this.paraphraseRepository = new ParaphraseRepository();
   }
 

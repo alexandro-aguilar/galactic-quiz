@@ -1,5 +1,4 @@
-import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime';
-import QuizQuestionsDTO from './QuizQuestionsDTO';
+import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime'; 
 import Question from './Question';
 import Quiz from './Quiz';
 
@@ -44,7 +43,6 @@ export default class ParaphraseRepository {
       return question;
     });
     const response = await Promise.all(paraphrasedQuestions);
-    console.log()
     return new Quiz(response);
   }
 }
