@@ -2,6 +2,7 @@ import { NestedStack, RemovalPolicy, StackProps } from "aws-cdk-lib";
 import { BlockPublicAccess, Bucket } from "aws-cdk-lib/aws-s3";
 import { BucketDeployment, Source } from "aws-cdk-lib/aws-s3-deployment";
 import { Construct } from "constructs";
+import path = require("path");
 
 
 export default class ComDayQuestionsBucketStack extends NestedStack {
@@ -18,7 +19,7 @@ export default class ComDayQuestionsBucketStack extends NestedStack {
     });
 
     new BucketDeployment(this, 'DeployFiles', {
-      sources: [Source.asset('./files')], // Path to your local files
+      sources: [Source.asset(path.join(__dirname, './files'))], // Path to your local files
       destinationBucket: this.bucket,
     });
   }
