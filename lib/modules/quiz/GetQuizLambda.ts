@@ -1,16 +1,17 @@
 import * as path from 'path';
 import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Policy, PolicyStatement, Role } from 'aws-cdk-lib/aws-iam';
+import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
+import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
 import { Duration } from 'aws-cdk-lib';
+import LambdaStackProps from '../../utils/LambdaStackProps';
 
 export class GetQuizLambda {
   private readonly name = 'GetQuiz';
 
-  constructor(scope: Construct, role: Role, apiGateway: HttpApi) {
+  constructor(scope: Construct, props: LambdaStackProps) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_20_X,
       entry: path.join(__dirname, '../../../app/modules/quiz/get/GetQuizHandler.ts'),
@@ -28,7 +29,7 @@ export class GetQuizLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role
+      role: props.role
     });
 
     //S3 access policy
@@ -36,7 +37,7 @@ export class GetQuizLambda {
       statements: [
         new PolicyStatement({
           actions: ['s3:GetObject'],
-          resources: ['arn:aws:s3:::com-day-questions/*'],
+          resources: [props.table.tableArn],
         }),
       ],
     });
@@ -61,7 +62,7 @@ export class GetQuizLambda {
     const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
 
     new HttpRoute(scope, `${this.name}Route`, {
-      httpApi: apiGateway,
+      httpApi: props.api,
       routeKey: HttpRouteKey.with('/quiz/{type}', HttpMethod.GET),
       integration
     });

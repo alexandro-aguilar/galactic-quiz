@@ -1,15 +1,16 @@
-import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from "aws-cdk-lib/aws-apigatewayv2";
+import { HttpMethod, HttpRoute, HttpRouteKey } from "aws-cdk-lib/aws-apigatewayv2";
 import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
-import { Policy, PolicyStatement, Role } from "aws-cdk-lib/aws-iam";
+import { Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
 import { Runtime, Architecture } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
 import path = require("path");
+import LambdaStackProps from "../../utils/LambdaStackProps";
 
 export default class SaveScoreLambda {
   private readonly name = 'SaveScore';
 
-  constructor(scope: Construct, role: Role, apiGateway: HttpApi) {
+  constructor(scope: Construct, props: LambdaStackProps) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_20_X,
       entry: path.join(__dirname, '../../../app/modules/score/save/SaveScoreHandler.ts'),
@@ -26,7 +27,7 @@ export default class SaveScoreLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role
+      role: props.role
     });
 
     // Create an inline policy for DynamoDB PutItem access
@@ -34,7 +35,7 @@ export default class SaveScoreLambda {
       statements: [
         new PolicyStatement({
           actions: ['dynamodb:UpdateItem'],
-          resources: ['arn:aws:dynamodb:us-east-1:058632605534:table/ComDayUsers'],
+          resources: [props.table.tableArn],
         }),
       ],
     });
@@ -45,7 +46,7 @@ export default class SaveScoreLambda {
     const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
 
     new HttpRoute(scope, `${this.name}Route`, {
-      httpApi: apiGateway,
+      httpApi: props.api,
       routeKey: HttpRouteKey.with('/score', HttpMethod.POST),
       integration
     });

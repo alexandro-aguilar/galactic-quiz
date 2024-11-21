@@ -1,15 +1,16 @@
 import path = require('path');
 import { Construct } from 'constructs';
-import { Policy, PolicyStatement, Role } from 'aws-cdk-lib/aws-iam';
+import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Runtime, Architecture } from 'aws-cdk-lib/aws-lambda';
-import { HttpMethod, HttpRoute, HttpRouteKey, HttpApi } from 'aws-cdk-lib/aws-apigatewayv2';
+import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import LambdaStackProps from '../../utils/LambdaStackProps';
 
 export default class RegisterUserLambda {
   private readonly name = 'RegisterUser';
 
-  constructor(scope: Construct, role: Role, apiGateway: HttpApi) {
+  constructor(scope: Construct, props: LambdaStackProps) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_20_X,
       entry: path.join(__dirname, '../../../app/modules/user/register/UserRegisterHandler.ts'),
@@ -26,7 +27,7 @@ export default class RegisterUserLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role
+      role: props.role
     });
 
     // Create an inline policy for DynamoDB PutItem access
@@ -34,7 +35,7 @@ export default class RegisterUserLambda {
       statements: [
         new PolicyStatement({
           actions: ['dynamodb:PutItem'],
-          resources: ['arn:aws:dynamodb:us-east-1:058632605534:table/ComDayUsers'],
+          resources: [props.table.tableArn],
         }),
       ],
     });
@@ -45,7 +46,7 @@ export default class RegisterUserLambda {
     const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
 
     new HttpRoute(scope, `${this.name}Route`, {
-      httpApi: apiGateway,
+      httpApi: props.api,
       routeKey: HttpRouteKey.with('/users', HttpMethod.POST),
       integration
     });
