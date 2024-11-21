@@ -17,11 +17,6 @@ export default class ComDayQuestionsBucketStack extends NestedStack {
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true
     });
-
-    new BucketDeployment(this, 'DeployFiles', {
-      sources: [Source.asset(path.join(__dirname, './files'))], // Path to your local files
-      destinationBucket: this.bucket,
-    });
   }
 
   get bucket(): Bucket {

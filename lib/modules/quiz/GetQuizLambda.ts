@@ -40,7 +40,7 @@ export class GetQuizLambda {
       statements: [
         new PolicyStatement({
           actions: ['s3:GetObject'],
-          resources: [props.bucket.bucketArn],
+          resources: [`${props.bucket.bucketArn}/*`],
         }),
       ],
     });
