@@ -1,9 +1,9 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { QuizStack } from './modules/quiz/QuizStack';
+import { QuizStack } from './modules/lambda/quiz/QuizStack';
 import { Role, ServicePrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
-import { UserStack } from './modules/users/UsersStack';
-import { ScoreStack } from './modules/score/ScoreStack';
+import { UserStack } from './modules/lambda/users/UsersStack';
+import { ScoreStack } from './modules/lambda/score/ScoreStack';
 import APIGatewayStack from './modules/apigateway/APIGatewayStack';
 import LambdaStackProps from './utils/LambdaStackProps';
 import ComDayUsersDynamoStack from './modules/dynamoDB/ComDayUsersDynamoStack';

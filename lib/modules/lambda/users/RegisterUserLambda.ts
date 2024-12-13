@@ -5,7 +5,7 @@ import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Runtime, Architecture } from 'aws-cdk-lib/aws-lambda';
 import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import LambdaStackProps from '../../utils/LambdaStackProps';
+import LambdaStackProps from '../../../utils/LambdaStackProps';
 
 export default class RegisterUserLambda {
   private readonly name = 'RegisterUser';
@@ -17,6 +17,10 @@ export default class RegisterUserLambda {
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       architecture: Architecture.ARM_64,
+      role: props.role,
+      environment: {
+        USERS_TABLE: props.table.tableName
+      },
       bundling: {
         externalModules: [
           'aws-sdk',
@@ -27,10 +31,6 @@ export default class RegisterUserLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role: props.role,
-      environment: {
-        USERS_TABLE: props.table.tableName
-      }
     });
 
     // Create an inline policy for DynamoDB PutItem access

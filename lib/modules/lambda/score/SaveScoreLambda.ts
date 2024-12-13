@@ -1,11 +1,11 @@
 import { HttpMethod, HttpRoute, HttpRouteKey } from "aws-cdk-lib/aws-apigatewayv2";
 import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
 import { Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
-import { Runtime, Architecture } from "aws-cdk-lib/aws-lambda";
+import { Runtime, Architecture, Tracing } from "aws-cdk-lib/aws-lambda";
 import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
 import path = require("path");
-import LambdaStackProps from "../../utils/LambdaStackProps";
+import LambdaStackProps from "../../../utils/LambdaStackProps";
 
 export default class SaveScoreLambda {
   private readonly name = 'SaveScore';
@@ -17,6 +17,11 @@ export default class SaveScoreLambda {
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       architecture: Architecture.ARM_64,
+      tracing: Tracing.ACTIVE,
+      role: props.role,
+      environment: {
+        USERS_TABLE: props.table.tableName
+      },
       bundling: {
         externalModules: [
           'aws-sdk',
@@ -27,10 +32,6 @@ export default class SaveScoreLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role: props.role,
-      environment: {
-        USERS_TABLE: props.table.tableName
-      }
     });
 
     // Create an inline policy for DynamoDB PutItem access
