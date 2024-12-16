@@ -13,16 +13,6 @@ export class MyLambdaStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // const api = new HttpApi(this, 'ComDay2024', {
-    //   corsPreflight: {
-    //     allowHeaders: ['Content-Type', 'Authorization'],
-    //     allowMethods: [CorsHttpMethod.GET, CorsHttpMethod.OPTIONS, CorsHttpMethod.POST],
-    //     allowOrigins: ['*'],
-    //     maxAge: cdk.Duration.days(10), // Cache preflight response for 10 days
-    //   },
-    //   apiName: 'ComDay2024Service'
-    // });
-
     const role = new Role(this, 'LambdaExecutionRole', {
       assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
       managedPolicies: [
