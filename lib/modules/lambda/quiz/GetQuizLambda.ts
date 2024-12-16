@@ -1,12 +1,12 @@
 import * as path from 'path';
-import { Architecture, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
 import { Duration } from 'aws-cdk-lib';
-import LambdaStackProps from '../../utils/LambdaStackProps';
+import LambdaStackProps from '../../../utils/LambdaStackProps';
 
 export class GetQuizLambda {
   private readonly name = 'GetQuiz';
@@ -14,11 +14,16 @@ export class GetQuizLambda {
   constructor(scope: Construct, props: LambdaStackProps) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_20_X,
-      entry: path.join(__dirname, '../../../app/modules/quiz/get/GetQuizHandler.ts'),
+      entry: path.join(__dirname, '../../../../app/modules/quiz/get/GetQuizHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       timeout: Duration.seconds(60),
       architecture: Architecture.ARM_64,
+      tracing: Tracing.ACTIVE,
+      role: props.role,
+      environment: {
+        QUIZ_BUCKET: props.bucket.bucketName
+      },
       bundling: {
         externalModules: [
           'aws-sdk',
@@ -29,10 +34,6 @@ export class GetQuizLambda {
         sourceMap: true,
         sourcesContent: false,
       },
-      role: props.role,
-      environment: {
-        QUIZ_BUCKET: props.bucket.bucketName
-      }
     });
 
     //S3 access policy
