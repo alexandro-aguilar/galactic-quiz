@@ -9,7 +9,7 @@ import LambdaStackProps from './utils/LambdaStackProps';
 import ComDayUsersDynamoStack from './modules/dynamoDB/ComDayUsersDynamoStack';
 import ComDayQuestionsBucketStack from './modules/s3/ComDayQuestionsBucketStack';
 
-export class MyLambdaStack extends cdk.Stack {
+export default class GalacticQuizStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
