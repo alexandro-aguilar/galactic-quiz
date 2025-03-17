@@ -2,4 +2,4 @@
 . "".husky/_/_/husky.sh"
 
 ./node_modules/.bin/commitlint --edit $1
-echo "commitlint --edit $1"
+
