@@ -1,5 +1,5 @@
-echo "#!/bin/sh
-. \"$(dirname \"$0\")/_/husky.sh\"
+#!/bin/sh
+. "".husky/_/_/husky.sh"
 
-./node_modules/.bin/commitlint --edit \$1
-" > .husky/commit-msg
+./node_modules/.bin/commitlint --edit $1
+echo "commitlint --edit $1"
