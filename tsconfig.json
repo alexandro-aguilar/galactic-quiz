@@ -6,6 +6,7 @@
       "es2020",
       "dom"
     ],
+    "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "strict": true,
     "noImplicitAny": true,
