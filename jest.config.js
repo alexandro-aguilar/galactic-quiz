@@ -4,7 +4,6 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   testRegex: '\\.(test|spec)\\.[t]s$', // Regex for test files
   roots: ['<rootDir>/test'],
-  testMatch: ['**/*.test.ts'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
@@ -17,9 +16,3 @@ module.exports = {
     '^@utils/(.*)$': '<rootDir>/app/utils/$1', // Map @app to the project root
   },
 };
-
-// const path = require('path');
-
-// module.exports = {
-//   rootDir: path.resolve(__dirname),
-// };
