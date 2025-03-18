@@ -5,7 +5,9 @@ import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Runtime, Architecture } from 'aws-cdk-lib/aws-lambda';
 import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import LambdaStackProps from '../../../utils/LambdaStackProps';
+import LambdaStackProps from '@iac/utils/LambdaStackProps';
+import esbuildBundlingConfig from '@iac/utils/esbuildBundlingConfig';
+
 
 export default class RegisterUserLambda {
   private readonly name = 'RegisterUser';
@@ -21,16 +23,7 @@ export default class RegisterUserLambda {
       environment: {
         USERS_TABLE: props.table.tableName
       },
-      bundling: {
-        externalModules: [
-          'aws-sdk',
-          '@aws-sdk'
-        ], // Exclude specific modules from bundling
-        nodeModules: [],     // Include specific modules in the bundle
-        target: 'node20',    // Set the target environment for esbuild
-        sourceMap: true,
-        sourcesContent: false,
-      },
+      bundling: esbuildBundlingConfig,
     });
 
     // Create an inline policy for DynamoDB PutItem access

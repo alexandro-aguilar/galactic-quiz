@@ -1,11 +1,12 @@
-import { HttpMethod, HttpRoute, HttpRouteKey } from "aws-cdk-lib/aws-apigatewayv2";
-import { HttpLambdaIntegration } from "aws-cdk-lib/aws-apigatewayv2-integrations";
-import { Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
-import { Runtime, Architecture, Tracing } from "aws-cdk-lib/aws-lambda";
-import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
-import { Construct } from "constructs";
-import path = require("path");
-import LambdaStackProps from "../../../utils/LambdaStackProps";
+import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
+import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { Runtime, Architecture, Tracing } from 'aws-cdk-lib/aws-lambda';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { Construct } from 'constructs';
+import path = require('path');
+import esbuildBundlingConfig from '@iac/utils/esbuildBundlingConfig';
+import LambdaStackProps from '@iac/utils/LambdaStackProps';
 
 export default class SaveScoreLambda {
   private readonly name = 'SaveScore';
@@ -22,16 +23,7 @@ export default class SaveScoreLambda {
       environment: {
         USERS_TABLE: props.table.tableName
       },
-      bundling: {
-        externalModules: [
-          'aws-sdk',
-          '@aws-sdk'
-        ], // Exclude specific modules from bundling
-        nodeModules: [],     // Include specific modules in the bundle
-        target: 'node20',    // Set the target environment for esbuild
-        sourceMap: true,
-        sourcesContent: false,
-      },
+      bundling: esbuildBundlingConfig,
     });
 
     // Create an inline policy for DynamoDB PutItem access

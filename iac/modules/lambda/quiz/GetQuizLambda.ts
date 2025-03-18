@@ -6,7 +6,8 @@ import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations
 import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
 import { Duration } from 'aws-cdk-lib';
-import LambdaStackProps from '../../../utils/LambdaStackProps';
+import LambdaStackProps from '@iac/utils/LambdaStackProps';
+import esbuildBundlingConfig from '@iac/utils/esbuildBundlingConfig';
 
 export class GetQuizLambda {
   private readonly name = 'GetQuiz';
@@ -24,16 +25,7 @@ export class GetQuizLambda {
       environment: {
         QUIZ_BUCKET: props.bucket.bucketName
       },
-      bundling: {
-        externalModules: [
-          'aws-sdk',
-          '@aws-sdk'
-        ], // Exclude specific modules from bundling
-        nodeModules: [],     // Include specific modules in the bundle
-        target: 'node20',    // Set the target environment for esbuild
-        sourceMap: true,
-        sourcesContent: false,
-      },
+      bundling: esbuildBundlingConfig,
     });
 
     //S3 access policy
