@@ -4,10 +4,10 @@ import { QuizStack } from './modules/lambda/quiz/QuizStack';
 import { Role, ServicePrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
 import { UserStack } from './modules/lambda/users/UsersStack';
 import { ScoreStack } from './modules/lambda/score/ScoreStack';
-import APIGatewayStack from './modules/apigateway/APIGatewayStack';
+import GalacticQuizAPIGatewayStack from './modules/apigateway/GalacticQuizAPIGatewayStack';
 import LambdaStackProps from './utils/LambdaStackProps';
-import ComDayUsersDynamoStack from './modules/dynamoDB/ComDayUsersDynamoStack';
-import ComDayQuestionsBucketStack from './modules/s3/ComDayQuestionsBucketStack';
+import GalacticQuizUsersDynamoStack from './modules/dynamoDB/GalacticQuizUsersDynamoStack';
+import GalacticQuizQuestionsBucketStack from './modules/s3/GalacticQuizQuestionsBucketStack';
 
 export default class GalacticQuizStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -20,13 +20,13 @@ export default class GalacticQuizStack extends cdk.Stack {
       ],
     });
 
-    const apiGatewayStack = new APIGatewayStack(this, {});
+    const apiGatewayStack = new GalacticQuizAPIGatewayStack(this, {});
     const api = apiGatewayStack.api;
 
-    const comDayUsersDynamoStack = new ComDayUsersDynamoStack(this, {});
-    const table = comDayUsersDynamoStack.table;
+    const galacticQuizUsersDynamoStack = new GalacticQuizUsersDynamoStack(this, {});
+    const table = galacticQuizUsersDynamoStack.table;
 
-    const comDayQuestionsBucketStack = new ComDayQuestionsBucketStack(this, {});
+    const comDayQuestionsBucketStack = new GalacticQuizQuestionsBucketStack(this, {});
     const bucket = comDayQuestionsBucketStack.bucket;
 
     const lambdaStackProps: LambdaStackProps = {
