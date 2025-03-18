@@ -1,9 +1,9 @@
+import Environment from '@iac/utils/Environment';
 import { NestedStack, RemovalPolicy, StackProps } from 'aws-cdk-lib';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
-import path = require('path');
-import Environment from '../../utils/Environment';
+import { join } from 'path';
 
 
 export default class GalacticQuizQuestionsBucketStack extends NestedStack {
@@ -20,7 +20,7 @@ export default class GalacticQuizQuestionsBucketStack extends NestedStack {
     });
 
     new BucketDeployment(this, 'DeployFiles', {
-      sources: [Source.asset(path.join(__dirname, './files'))], // Path to your local files
+      sources: [Source.asset(join(__dirname, './files'))], // Path to your local files
       destinationBucket: this.bucket,
     });
   }

@@ -4,7 +4,7 @@ import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Runtime, Architecture, Tracing } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
-import path = require('path');
+import { join } from 'path';
 import esbuildBundlingConfig from '@iac/utils/esbuildBundlingConfig';
 import LambdaStackProps from '@iac/utils/LambdaStackProps';
 
@@ -14,7 +14,7 @@ export default class SaveScoreLambda {
   constructor(scope: Construct, props: LambdaStackProps) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_22_X,
-      entry: path.join(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts'),
+      entry: join(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       architecture: Architecture.ARM_64,

@@ -1,4 +1,4 @@
-import * as path from 'path';
+import { join } from 'path';
 import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
@@ -15,7 +15,7 @@ export class GetQuizLambda {
   constructor(scope: Construct, props: LambdaStackProps) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_22_X,
-      entry: path.join(__dirname, '../../../../app/modules/quiz/get/GetQuizHandler.ts'),
+      entry: join(__dirname, '../../../../app/modules/quiz/get/GetQuizHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       timeout: Duration.seconds(60),

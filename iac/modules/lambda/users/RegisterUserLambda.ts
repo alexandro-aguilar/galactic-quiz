@@ -1,4 +1,4 @@
-import path = require('path');
+import { join } from 'path';
 import { Construct } from 'constructs';
 import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
@@ -15,7 +15,7 @@ export default class RegisterUserLambda {
   constructor(scope: Construct, props: LambdaStackProps) {
     const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
       runtime: Runtime.NODEJS_22_X,
-      entry: path.join(__dirname, '../../../../app/modules/user/register/UserRegisterHandler.ts'),
+      entry: join(__dirname, '../../../../app/modules/user/register/UserRegisterHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       architecture: Architecture.ARM_64,
