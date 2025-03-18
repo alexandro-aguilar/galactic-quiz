@@ -1,15 +1,15 @@
 {
-  "name": "cdk-lambda-template",
+  "name": "galactic-quiz",
   "version": "0.1.0",
   "bin": {
-    "cdk-lambda-template": "bin/cdk-lambda-template.js"
+    "galactic-quiz": "iac/GalacticQuiz.js"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/ComDay2024.template.json"
+    "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/GalacticQuiz.template.json"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.145",
