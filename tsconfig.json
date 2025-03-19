@@ -3,7 +3,6 @@
     "baseUrl": "./",
     "paths": {
       "@app/*": ["./app/*"],
-      "@iac/*": ["./iac/*"],
       "@test/*": ["./test/*"]
     },
     "target": "ES2020",
