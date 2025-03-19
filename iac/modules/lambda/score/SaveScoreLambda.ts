@@ -5,8 +5,8 @@ import { Runtime, Architecture, Tracing } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 import { join } from 'path';
-import esbuildBundlingConfig from '@iac/utils/esbuildBundlingConfig';
-import LambdaStackProps from '@iac/utils/LambdaStackProps';
+import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
+import LambdaStackProps from '../../../utils/LambdaStackProps';
 
 export default class SaveScoreLambda {
   private readonly name = 'SaveScore';

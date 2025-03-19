@@ -6,8 +6,8 @@ import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations
 import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
 import { Duration } from 'aws-cdk-lib';
-import LambdaStackProps from '@iac/utils/LambdaStackProps';
-import esbuildBundlingConfig from '@iac/utils/esbuildBundlingConfig';
+import LambdaStackProps from '../../../utils/LambdaStackProps';
+import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
 
 export class GetQuizLambda {
   private readonly name = 'GetQuiz';

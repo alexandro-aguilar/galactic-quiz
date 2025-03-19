@@ -1,4 +1,4 @@
-import Environment from '@iac/utils/Environment';
+import Environment from '../../utils/Environment';
 import { NestedStack, RemovalPolicy, StackProps } from 'aws-cdk-lib';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
