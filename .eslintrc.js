@@ -7,8 +7,13 @@ module.exports = {
     'jasmine': true,
   },
   plugins: ['jest'],
-  extends: ['airbnb-base'],
+  extends: [
+    'airbnb-base',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended'
+  ],
   overrides: [],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
   },
@@ -45,6 +50,6 @@ module.exports = {
     'import/no-relative-packages': 'off',
     'no-throw-literal': 'off', // turned off ability to perfor throw instead of throw new error
     'no-continue': 'off',
-    'quotes': ['error', 'single'],
+    'quotes': ['warning', 'single', { 'avoidEscape': true, 'allowTemplateLiterals': true }]
   },
 };

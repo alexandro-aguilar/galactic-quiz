@@ -28,6 +28,7 @@ export default class SaveScoreRepository {
   
       await this.client.send(command);
       return true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(error: any) {
       if (error.name === 'ConditionalCheckFailedException') {
         return false;
