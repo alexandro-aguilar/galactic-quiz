@@ -8,11 +8,11 @@ import { join } from 'path';
 import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
 import LambdaStackProps from '../../../utils/LambdaStackProps';
 
-export default class SaveScoreLambda {
-  private readonly name = 'SaveScore';
+export default class SaveScoreLambda extends NodejsFunction {
+  private readonly name;
 
   constructor(scope: Construct, props: LambdaStackProps) {
-    const lambda = new NodejsFunction(scope, `${this.name}Lambda`, {
+    super(scope, `SaveScoreLambda`, {
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
@@ -25,7 +25,7 @@ export default class SaveScoreLambda {
       },
       bundling: esbuildBundlingConfig,
     });
-
+    this.name = 'SaveScore';
     // Create an inline policy for DynamoDB PutItem access
     const dynamoUpdateItemPolicy = new Policy(scope, `${this.name}LambdaDynamoUpdateItemPolicy`, {
       statements: [
@@ -37,9 +37,9 @@ export default class SaveScoreLambda {
     });
 
     // Attach the DynamoDB access policy to the Lambda function's role
-    lambda.role?.attachInlinePolicy(dynamoUpdateItemPolicy);
+    this.role?.attachInlinePolicy(dynamoUpdateItemPolicy);
 
-    const integration = new HttpLambdaIntegration(`${this.name}Integration`, lambda);
+    const integration = new HttpLambdaIntegration(`${this.name}Integration`, this);
 
     new HttpRoute(scope, `${this.name}Route`, {
       httpApi: props.api,
