@@ -16,11 +16,11 @@ export default class SaveScoreRepository {
       const command = new UpdateCommand({
         TableName: Environment.UsersTable,
         Key: {
-          email: score.email
+          email: score.Email
         },
         UpdateExpression: 'set score = :score',
         ExpressionAttributeValues: {
-          ':score': score.score
+          ':score': score.Score
         },
         ConditionExpression: 'attribute_not_exists(score)',
         ReturnValues: 'NONE'
