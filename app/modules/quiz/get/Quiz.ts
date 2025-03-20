@@ -13,7 +13,7 @@ export default class Quiz {
     return this._questions;
   }
 
-  toJson() {
+  toJson(): object {
     return this.questions.map(question => question.toJson())
   }
 
