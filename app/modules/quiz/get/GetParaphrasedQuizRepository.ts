@@ -27,7 +27,7 @@ export default class GetQuizRepository {
       const file = await response.Body?.transformToString() as string;
       const questions: Array<QuizQuestionsDTO> = JSON.parse(file);
       const quiz = Quiz.fromObject(questions);
-      const paraphrasedQuiz = await this.paraphraseRepository.execute(quiz.questions);
+      const paraphrasedQuiz = await this.paraphraseRepository.execute(quiz.Questions);
       return paraphrasedQuiz;
     } catch (error) {
       console.error('Error getting object:', error);
