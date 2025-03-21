@@ -50,7 +50,6 @@ describe('GetQuizController - Base Case', () => {
 
       // Act
       const response: APIGatewayProxyStructuredResultV2 = await getQuizController.execute(request) as APIGatewayProxyStructuredResultV2;
-      console.log(response);
       
       // Assert
       expect(response.statusCode).toBe(expectedStatus);
