@@ -10,9 +10,13 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageReporters: ['lcov', 'text'],
-  collectCoverageFrom: ['app/directory/**/*.{ts,tsx}', '!**/node_modules/**', '!**/*.d.ts', '!**/I*'],
+  collectCoverageFrom: [
+    "app/**/*.{ts,tsx}",
+    '!**/node_modules/**', '!**/*.d.ts',
+    '!**/I*'
+  ],
   moduleNameMapper: {
     '^@app/(.*)$': '<rootDir>/app/$1', // Map @app to the project root
-    '^@utils/(.*)$': '<rootDir>/app/utils/$1', // Map @app to the project root
+    '^@utils/(.*)$': '<rootDir>/app/utils/$1', // Map @util to the project root
   },
 };
