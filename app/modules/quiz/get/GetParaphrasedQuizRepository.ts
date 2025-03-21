@@ -4,7 +4,7 @@ import QuizQuestionsDTO from './QuizQuestionsDTO';
 import ParaphraseRepository from './ParaphraseRepository';
 import Environment from '../../../utils/Environment';
 
-export default class GetQuizRepository {
+export default class GetParaphrasedQuizRepository {
   
   private readonly client: S3Client;
   private readonly bucket: string;
