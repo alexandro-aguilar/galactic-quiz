@@ -11,6 +11,10 @@ jobs:
     environment:
       name: dev
 
+    permissions:
+      id-token: write
+      contents: read
+
     env:
       AWS_REGION: us-east-1
 
@@ -26,11 +30,13 @@ jobs:
     - name: Install dependencies
       run: yarn
 
-    - name: Configure aws credentials
+    - name: Test
+      run: yarn test
+
+    - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        role-to-assume: arn:aws:iam::058632605534:role/GalacticQuizGithubActionsDeploy
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Get AWS Account ID
