@@ -34,7 +34,7 @@ jobs:
       run: yarn test --silent
 
     - name: Configure AWS credentials using OIDC
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::058632605534:role/GalacticQuizGithubActionsDeploy
         aws-region: ${{ env.AWS_REGION }}
