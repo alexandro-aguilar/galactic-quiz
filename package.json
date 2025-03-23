@@ -30,17 +30,17 @@
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
     "typescript": "~5.8.2",
-    "typescript-eslint": "^8.26.1"
+    "typescript-eslint": "^8.26.1",
+    "constructs": "^10.4.2",
+    "source-map-support": "^0.5.21",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1"
   },
   "dependencies": {
     "@aws-cdk/aws-lambda-nodejs": "^1.204.0",
     "@aws-sdk/client-bedrock-runtime": "^3.758.0",
     "@aws-sdk/client-dynamodb": "^3.767.0",
     "@aws-sdk/client-s3": "^3.758.0",
-    "@aws-sdk/lib-dynamodb": "^3.767.0",
-    "@typescript-eslint/eslint-plugin": "^8.26.1",
-    "@typescript-eslint/parser": "^8.26.1",
-    "constructs": "^10.4.2",
-    "source-map-support": "^0.5.21"
+    "@aws-sdk/lib-dynamodb": "^3.767.0"
   }
 }
