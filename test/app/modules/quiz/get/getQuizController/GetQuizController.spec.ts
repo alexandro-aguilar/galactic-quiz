@@ -30,7 +30,7 @@ describe('GetQuizController - Base Case', () => {
   );
 });
 
-describe('GetQuizController - Base Case', () => {
+describe('GetQuizController - Error', () => {
   let getQuizController: GetQuizController;
 
   const mockGetQuizRepository = {
