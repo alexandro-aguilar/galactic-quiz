@@ -33,6 +33,19 @@ jobs:
     - name: Test
       run: yarn test --silent
 
+    - name: Generate GitHub OIDC token
+      id: jwt
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const token = await core.getIDToken();
+          core.setOutput("token", token);
+
+    - name: Print GitHub OIDC token
+      run: |
+        echo "JWT:"
+        echo "${{ steps.jwt.outputs.token }}"
+
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
