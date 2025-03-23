@@ -23,19 +23,25 @@ jobs:
       with:
         node-version: 22
 
+    - name: Enable Corepack and activate Yarn
+      run: |
+        corepack enable
+        corepack prepare yarn@stable --activate
+
     - name: Cache Yarn dependencies
       id: cache-deps
       uses: actions/cache@v3
       with:
         path: |
-          **/node_modules
           .yarn/cache
+          .yarn/unplugged
+          .pnp.*
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
 
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
+    - name: Install dependencies (Yarn v3)
+      run: yarn install --immutable
 
   test:
     needs: install
@@ -50,16 +56,22 @@ jobs:
       with:
         node-version: 22
 
+    - name: Enable Corepack and activate Yarn
+      run: |
+        corepack enable
+        corepack prepare yarn@stable --activate
+
     - name: Restore Yarn cache
       uses: actions/cache@v3
       with:
         path: |
-          **/node_modules
           .yarn/cache
+          .yarn/unplugged
+          .pnp.*
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-    - name: Install dependencies (if cache missed)
-      run: yarn install --frozen-lockfile
+    - name: Install dependencies (Yarn v3)
+      run: yarn install --immutable
 
     - name: Run tests
       run: yarn test --silent
@@ -83,16 +95,22 @@ jobs:
       with:
         node-version: 22
 
+    - name: Enable Corepack and activate Yarn
+      run: |
+        corepack enable
+        corepack prepare yarn@stable --activate
+
     - name: Restore Yarn cache
       uses: actions/cache@v3
       with:
         path: |
-          **/node_modules
           .yarn/cache
+          .yarn/unplugged
+          .pnp.*
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
-    - name: Install dependencies (if cache missed)
-      run: yarn install --frozen-lockfile
+    - name: Install dependencies (Yarn v3)
+      run: yarn install --immutable
 
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
