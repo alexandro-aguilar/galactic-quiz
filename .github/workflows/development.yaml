@@ -28,10 +28,10 @@ jobs:
         node-version: 20
 
     - name: Install dependencies
-      run: yarn
+      run: yarn install --silent
 
     - name: Test
-      run: yarn test
+      run: yarn test --silent
 
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v2
