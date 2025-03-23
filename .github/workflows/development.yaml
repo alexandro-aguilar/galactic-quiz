@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  deploy:
+  setup:
     runs-on: ubuntu-latest
     environment:
       name: dev
@@ -19,6 +19,7 @@ jobs:
       AWS_REGION: us-east-1
 
     steps:
+
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -30,21 +31,24 @@ jobs:
     - name: Install dependencies
       run: yarn install --silent
 
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+
+    steps:
+
     - name: Test
       run: yarn test --silent
 
-    - name: Generate GitHub OIDC token
-      id: jwt
-      uses: actions/github-script@v7
-      with:
-        script: |
-          const token = await core.getIDToken();
-          core.setOutput("token", token);
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
 
-    - name: Print GitHub OIDC token
-      run: |
-        echo "JWT:"
-        echo "${{ steps.jwt.outputs.token }}"
+    steps:
 
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
