@@ -27,8 +27,11 @@ jobs:
       run: |
         corepack enable
         corepack prepare yarn@stable --activate
+    - name: Ensure Yarn cache directory exists
 
+      run: mkdir -p .yarn/cache
     - name: Cache Yarn dependencies
+
       id: cache-deps
       uses: actions/cache@v3
       with:
