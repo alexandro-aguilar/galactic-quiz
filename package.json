@@ -1,7 +1,6 @@
 {
   "name": "galactic-quiz",
   "version": "0.1.0",
-  "bin": "iac/GalacticQuiz.js",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
