@@ -14,6 +14,7 @@ export default abstract class BaseAPIGatewayController<TOutput> implements Contr
         statusCode: HttpStatusCode.OK ?? result.statusCode,
         body: JSON.stringify(result.body),
         headers: {
+          ...event.headers,
           'Content-Type': event.headers['Content-Type'] ?? 'application/json; charset=utf-8'
         }
       }
