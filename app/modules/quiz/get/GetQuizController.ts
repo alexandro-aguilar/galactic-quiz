@@ -1,8 +1,8 @@
 import GetQuizRepository from './GetQuizRepository';
 import { APIGatewayProxyEventV2 } from 'aws-lambda';
 import Quiz from './Quiz';
-import BaseAPIGatewayController from '@app/common/controller/BaseAPIGatewayController';
-import ApiGatewayControllerResponse from '@app/common/controller/ApiGatewayControllerResponse';
+import BaseAPIGatewayController from '@app/core/controller/BaseAPIGatewayController';
+import ApiGatewayControllerResponse from '@app/core/controller/ApiGatewayControllerResponse';
 
 export default class GetQuizController extends BaseAPIGatewayController<object> {
   constructor(
