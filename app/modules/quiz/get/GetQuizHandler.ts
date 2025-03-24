@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import GetQuizController from './GetQuizController';
 import container from './container';
