@@ -5,7 +5,7 @@ import ApiGatewayControllerResponse from './ApiGatewayControllerResponse';
 
 export default abstract class BaseAPIGatewayController<TOutput> implements Controller<APIGatewayProxyEventV2, APIGatewayProxyResultV2> {
 
-  abstract run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<TOutput>>;
+  protected abstract run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<TOutput>>;
 
   async execute(event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> {
     try {
