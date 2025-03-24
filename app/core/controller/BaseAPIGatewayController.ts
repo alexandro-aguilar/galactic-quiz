@@ -2,7 +2,9 @@ import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import Controller from './Controller';
 import HttpStatusCode from '@app/utils/httpStatusCode';
 import ApiGatewayControllerResponse from './ApiGatewayControllerResponse';
+import { injectable } from 'inversify';
 
+@injectable()
 export default abstract class BaseAPIGatewayController<TOutput> implements Controller<APIGatewayProxyEventV2, APIGatewayProxyResultV2> {
 
   protected abstract run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<TOutput>>;
