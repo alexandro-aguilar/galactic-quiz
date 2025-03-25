@@ -1,5 +1,6 @@
 import Answer from './Answer';
 import Question from './Question';
+import QuizDto from './QuizDto';
 import QuizQuestionsDTO from './QuizQuestionsDTO';
 
 export default class Quiz {
@@ -13,8 +14,10 @@ export default class Quiz {
     return this.questions;
   }
 
-  toJson(): object {
-    return this.questions.map(question => question.toJson())
+  toJson(): QuizDto {
+    return {
+      questions: this.questions.map(question => question.toJson())
+    };
   }
 
   toString() {
