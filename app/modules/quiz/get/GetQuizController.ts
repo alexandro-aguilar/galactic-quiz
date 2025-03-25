@@ -1,15 +1,15 @@
-import GetQuizRepository from './GetQuizRepository';
 import { APIGatewayProxyEventV2 } from 'aws-lambda';
 import Quiz from './Quiz';
 import BaseAPIGatewayController from '@app/core/infrastructure/controller/BaseAPIGatewayController';
 import ApiGatewayControllerResponse from '@app/core/infrastructure/controller/ApiGatewayControllerResponse';
 import { inject, injectable } from 'inversify';
 import types from './types';
+import Repository from '@app/core/domain/repository/Repository';
 
 @injectable()
 export default class GetQuizController extends BaseAPIGatewayController<object> {
   constructor(
-    @inject(types.GetQuizRepository) private readonly getQuizRepository: GetQuizRepository
+    @inject(types.GetQuizRepository) private readonly getQuizRepository: Repository<number, Quiz>
   ) {
     super();
   }

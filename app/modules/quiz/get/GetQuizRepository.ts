@@ -3,9 +3,10 @@ import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import QuizQuestionsDTO from './QuizQuestionsDTO';
 import Environment from '../../../utils/Environment';
 import { injectable } from 'inversify';
+import Repository from '@app/core/domain/repository/Repository';
 
 @injectable()
-export default class GetQuizRepository {
+export default class GetQuizRepository implements Repository<number, Quiz> {
   
   private readonly client: S3Client;
   private readonly bucket: string;
