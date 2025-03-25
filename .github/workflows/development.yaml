@@ -120,7 +120,7 @@ jobs:
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: ${{ env.AWS_ROLE_ARN }}
+        role-to-assume: arn:aws:iam::058632605534:role/GalacticQuizGithubActionsDeploy
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Get AWS Account ID
