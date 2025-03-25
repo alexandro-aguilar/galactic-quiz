@@ -117,10 +117,12 @@ jobs:
     - name: Install dependencies (Yarn v3)
       run: yarn install --immutable
 
-    - name: Debug AWS Role Configuration
+    - name: Set up secret file
+      env:
+        DEBUG_PASSWORD: ${{ secrets.AWS_ROLE_ARN }}
       run: |
-        echo "Raw AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}"
-        echo "Interpolated AWS_ROLE_ARN: ${{ env.AWS_ROLE_ARN }}"
+        echo $DEBUG_PASSWORD >> a.txt
+        cat a.txt
 
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
