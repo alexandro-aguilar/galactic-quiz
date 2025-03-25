@@ -14,7 +14,6 @@ describe('GetQuizController - Base Case', () => {
   beforeEach(() => {
     getQuizController = new GetQuizController(mockGetQuizRepository as any);
     (getQuizController as any).responseMapper = new ResponseMapper();
-    console.log('getQuizController', getQuizController);
   });
 
   test.each(fixtures)(

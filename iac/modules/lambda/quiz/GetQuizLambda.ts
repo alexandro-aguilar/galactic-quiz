@@ -8,12 +8,14 @@ import { Construct } from 'constructs';
 import { Duration } from 'aws-cdk-lib';
 import LambdaStackProps from '../../../utils/LambdaStackProps';
 import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
+import Environment from '../../../utils/Environment';
 
 export class GetQuizLambda extends NodejsFunction {
   private readonly name;
 
   constructor(scope: Construct, props: LambdaStackProps) {
     super(scope, `GetQuizLambda`, {
+      functionName: `GetQuizLambda-${Environment.projectName}-${Environment.stage}`,
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/quiz/get/GetQuizHandler.ts'),
       handler: 'handler', // Name of the exported handler function,

@@ -7,6 +7,7 @@ import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import LambdaStackProps from '../../../utils/LambdaStackProps';
 import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
+import Environment from '../../../utils/Environment';
 
 
 export default class RegisterUserLambda extends NodejsFunction {
@@ -14,6 +15,7 @@ export default class RegisterUserLambda extends NodejsFunction {
 
   constructor(scope: Construct, props: LambdaStackProps) {
     super(scope, `RegisterUserLambda`, {
+      functionName: `RegisterUserLambda-${Environment.projectName}-${Environment.stage}`,
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/user/register/UserRegisterHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
