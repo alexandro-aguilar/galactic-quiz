@@ -5,13 +5,13 @@ import ApiGatewayControllerResponse from './ApiGatewayControllerResponse';
 import { injectable } from 'inversify';
 
 @injectable()
-export default abstract class BaseAPIGatewayController<TOutput> implements Controller<APIGatewayProxyEventV2, APIGatewayProxyResultV2> {
+export default abstract class BaseAPIGatewayController<Response> implements Controller<APIGatewayProxyEventV2, APIGatewayProxyResultV2> {
 
-  protected abstract run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<TOutput>>;
+  protected abstract run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<Response>>;
 
   async execute(event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> {
     try {
-      const result: ApiGatewayControllerResponse<TOutput> = await this.run(event);
+      const result: ApiGatewayControllerResponse<Response> = await this.run(event);
       return {
         statusCode: HttpStatusCode.OK ?? result.statusCode,
         body: JSON.stringify(result.body),
