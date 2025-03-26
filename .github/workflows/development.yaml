@@ -8,6 +8,8 @@ on:
 env:
   AWS_REGION: us-east-1
   AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+  STAGE: ${{ vars.STAGE }}
+  PROJECT_NAME: ${{ vars.PROJECT_NAME }}
 
 jobs:
   install:
@@ -47,15 +49,6 @@ jobs:
 
     - name: Install dependencies
       run: yarn install
-
-    - name: Check variables
-      run: |
-        echo "STAGE: ${{ env.STAGE }}"
-        echo "AWS_REGION: ${{ env.AWS_REGION }}"
-        echo "PROJECT_NAME: ${{ env.PROJECT_NAME }}"
-        echo "Region: ${{ vars.AWS_REGION }}"
-        echo "Project: ${{ vars.PROJECT_NAME }}"
-        echo "Stage: ${{ vars.STAGE }}"
 
   test:
     needs: install
@@ -133,7 +126,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: ${{ env.AWS_ROLE_ARN }}
-        aws-region: ${{ env.AWS_REGION }}
+        aws-region: ${{ vars.AWS_REGION }}
 
     - name: Get AWS Account ID
       run: |
