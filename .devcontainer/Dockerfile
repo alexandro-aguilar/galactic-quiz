@@ -21,7 +21,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN pip3 install aws-sam-cli
 
 # Habilitar Yarn con Corepack
-RUN corepack enable && corepack prepare yarn@stable --activate
+RUN corepack enable && corepack prepare yarn@4 --activate
 
 # Establecer directorio de trabajo
 WORKDIR /workspaces/app
