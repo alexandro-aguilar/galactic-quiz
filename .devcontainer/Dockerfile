@@ -23,6 +23,9 @@ RUN pip3 install aws-sam-cli
 # Habilitar Yarn con Corepack
 RUN corepack enable && corepack prepare yarn@4 --activate
 
+# Instalar LocalStack
+RUN pip install localstack
+
 # Establecer directorio de trabajo
 WORKDIR /workspaces/app
 

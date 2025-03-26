@@ -15,7 +15,7 @@ services:
     command: sleep infinity
 
   localstack:
-    container_name: localstack-${APP_NAME:-app}
+    container_name: localstack-${PROJECT_NAME:-app}
     image: localstack/localstack-pro:latest
     ports:
       - "4566:4566"            # Puerto principal de LocalStack
