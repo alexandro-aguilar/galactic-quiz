@@ -1,19 +1,21 @@
 version: '3.8'
 services:
-  vo:
+  devcontainer:
     build:
       context: .
-      dockerfile: .devcontainer/Dockerfile
-    volumes:
-      - .:/workspaces/${APP_NAME:-app}:cached
+      dockerfile: ./Dockerfile
+    # volumes:
+    #   - .:/workspaces/galactic-quiz
+    # working_dir: /workspaces/galactic-quiz
+          
     depends_on:
      - localstack
     networks:
-      - ${APP_NAME:-app}-network
+      - app-network
     command: sleep infinity
 
   localstack:
-    container_name: localstack-${APP_NAME:-app}
+    container_name: localstack-${PROJECT_NAME:-app}
     image: localstack/localstack-pro:latest
     ports:
       - "4566:4566"            # Puerto principal de LocalStack
@@ -28,16 +30,20 @@ services:
       #lets this config as is, requiered for localstack to communicate with docker
       - /var/run/docker.sock:/var/run/docker.sock
       
-      - localstack-${APP_NAME:-app}:/var/lib/localstack
-      - localstack-${APP_NAME:-app}-state:/tmp/localstack_state
+      - type: volume
+        source: app-localstack
+        target: /var/lib/localstack
+      - type: volume
+        source: app-localstack-state
+        target: /var/lib/localstack-state
     networks:
-      - ${APP_NAME:-app}-network
+      - app-network
 
 volumes:
-  ${APP_NAME:-app}-cached:
-  localstack-${APP_NAME:-app}:
-  localstack-${APP_NAME:-app}-state:
+  app-cached:
+  app-localstack:
+  app-localstack-state:
 
 networks:
-  ${APP_NAME:-app}-network:
+  app-network:
     driver: bridge
