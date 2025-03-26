@@ -12,6 +12,8 @@ env:
 jobs:
   install:
     runs-on: ubuntu-latest
+    environment:
+      name: dev
     outputs:
       cache-hit: ${{ steps.cache-deps.outputs.cache-hit }}
 
@@ -58,6 +60,8 @@ jobs:
   test:
     needs: install
     runs-on: ubuntu-latest
+    environment:
+      name: dev
 
     steps:
     - name: Checkout repository
