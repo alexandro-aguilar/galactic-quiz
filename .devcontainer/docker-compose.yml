@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  vo:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/workspaces/${APP_NAME:-app}:cached
+    depends_on:
+     - localstack
+    networks:
+      - ${APP_NAME:-app}-network
+    command: sleep infinity
+
+  localstack:
+    container_name: localstack-${APP_NAME:-app}
+    image: localstack/localstack-pro:latest
+    ports:
+      - "4566:4566"            # Puerto principal de LocalStack
+      - "4510-4559:4510-4559"  # Rango de puertos para servicios externos
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=${LOCALSTACK_DEBUG:-0}
+      - PERSISTENCE=true
+      - STATE_DIR=/tmp/localstack_state
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+    volumes:
+      #lets this config as is, requiered for localstack to communicate with docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+      - localstack-${APP_NAME:-app}:/var/lib/localstack
+      - localstack-${APP_NAME:-app}-state:/tmp/localstack_state
+    networks:
+      - ${APP_NAME:-app}-network
+
+volumes:
+  ${APP_NAME:-app}-cached:
+  localstack-${APP_NAME:-app}:
+  localstack-${APP_NAME:-app}-state:
+
+networks:
+  ${APP_NAME:-app}-network:
+    driver: bridge
