@@ -1,14 +1,12 @@
 // .devcontainer/devcontainer.json
 {
 	"name": "Node Devcontainer",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": ".."
+	"remoteEnv": {
+		"DOTENV_PATH": ".devcontainer/.env"
 	},
-	"runArgs": [
-		"--platform=linux/amd64"
-	],
-	"workspaceFolder": "/workspaces/galactic-quiz",
+	"dockerComposeFile": "./docker-compose.yml",
+  	"service": "devcontainer",
+
 	"forwardPorts": [
 		3000
 	],
@@ -19,7 +17,7 @@
 			}
 		}
 	},
-	"postCreateCommand": "yarn install",
+	"postCreateCommand": "yarn",
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind"
 	],
