@@ -1,4 +1,4 @@
-export default interface UserRegisterRequestDTO {
+export default interface UserRegisterRequestDto {
   email: string,
   profile: number
 }

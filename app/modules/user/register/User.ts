@@ -1,13 +1,14 @@
-import Types from '../../../utils/types';
+import Practices from './Practices';
+import UserDto from './UserDto';
 
 export default class User {
   private email: string;
   private name: string;
-  private profile: Types;
+  private practice: Practices;
 
-  constructor(email: string, profile: Types, name: string) {
+  constructor(email: string, profile: Practices, name: string) {
     this.email = email;
-    this.profile = profile;
+    this.practice = profile;
     this.name = name;
   }
 
@@ -15,18 +16,18 @@ export default class User {
     return this.email;
   }
 
-  get Profile(): Types {
-    return this.profile;
+  get Profile(): Practices {
+    return this.practice;
   }
 
   get Name(): string {
     return this.name;
   }
 
-  toJSON(): object {
+  toJSON(): UserDto {
     return {
       email: this.email,
-      profile: this.profile,
+      practice: this.practice,
       name: this.name
     }
   }
