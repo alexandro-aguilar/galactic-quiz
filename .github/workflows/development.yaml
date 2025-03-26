@@ -44,7 +44,13 @@ jobs:
           ${{ runner.os }}-yarn-
 
     - name: Install dependencies
-      run: yarn install 
+      run: yarn install
+
+    - name: Check variables
+      run: |
+        echo "STAGE: ${{ env.STAGE }}"
+        echo "AWS_REGION: ${{ env.AWS_REGION }}"
+        echo "PROJECT_NAME: ${{ env.PROJECT_NAME }}"
 
   test:
     needs: install
