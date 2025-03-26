@@ -1,4 +1,4 @@
-import HttpStatusCode from '@app/utils/httpStatusCode';
+import HttpStatusCode from '@app/core/infrastructure/enum/httpStatusCode';
 
 export default class ApiGatewayControllerResponse<T> {
   constructor(

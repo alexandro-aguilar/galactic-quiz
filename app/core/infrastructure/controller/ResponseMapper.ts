@@ -1,7 +1,7 @@
 import { APIGatewayProxyResultV2 } from 'aws-lambda';
 import { injectable } from 'inversify';
 import ApiGatewayControllerResponse from './ApiGatewayControllerResponse';
-import HttpStatusCode from '@app/utils/httpStatusCode';
+import HttpStatusCode from '@app/core/infrastructure/enum/httpStatusCode';
 import BaseMapper from '@app/core/domain/mapper/BaseMapper';
 
 @injectable()

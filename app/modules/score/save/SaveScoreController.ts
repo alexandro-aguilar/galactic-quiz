@@ -1,6 +1,6 @@
 import Score from './Score';
 import SaveScoreRepository from './SaveScoreRepository';
-import HttpStatusCode from '../../../utils/httpStatusCode';
+import HttpStatusCode from '../../../core/infrastructure/enum/httpStatusCode';
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 
 export default class SaveScoreController {

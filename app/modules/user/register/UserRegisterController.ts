@@ -1,7 +1,7 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import User from './User';
 import UserRegisterRepository from './UserRegisterRepository';
-import HttpStatusCode from '../../../utils/httpStatusCode';
+import HttpStatusCode from '../../../core/infrastructure/enum/httpStatusCode';
 
 export default class UserRegisterController {
   constructor(
