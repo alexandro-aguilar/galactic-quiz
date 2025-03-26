@@ -45,7 +45,7 @@ jobs:
           ${{ runner.os }}-yarn-
 
     - name: Install dependencies (Yarn v3)
-      run: yarn install --immutable
+      run: yarn install 
 
   test:
     needs: install
@@ -75,7 +75,7 @@ jobs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
     - name: Install dependencies (Yarn v3)
-      run: yarn install --immutable
+      run: yarn install 
 
     - name: Run tests
       run: yarn test --silent
@@ -115,7 +115,7 @@ jobs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
     - name: Install dependencies (Yarn v3)
-      run: yarn install --immutable
+      run: yarn install 
 
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
