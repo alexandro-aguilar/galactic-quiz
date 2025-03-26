@@ -1,0 +1,27 @@
+// .devcontainer/devcontainer.json
+{
+	"name": "Node Devcontainer",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"runArgs": [
+		"--platform=linux/amd64"
+	],
+	"workspaceFolder": "/workspaces/galactic-quiz",
+	"forwardPorts": [
+		3000
+	],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash"
+			}
+		}
+	},
+	"postCreateCommand": "yarn install",
+	"mounts": [
+		"source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind"
+	],
+	"remoteUser": "root"
+}
