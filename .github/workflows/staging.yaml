@@ -117,17 +117,10 @@ jobs:
     - name: Install dependencies (Yarn v3)
       run: yarn install --immutable
 
-    - name: Set up secret file
-      env:
-        DEBUG_PASSWORD: ${{ secrets.AWS_ROLE_ARN }}
-      run: |
-        echo $DEBUG_PASSWORD >> a.txt
-        cat a.txt
-
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::058632605534:role/GalacticQuizGithubActionsDeploy
+        role-to-assume: ${{ env.AWS_ROLE_ARN }}y
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Get AWS Account ID
