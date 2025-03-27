@@ -7,9 +7,9 @@
 	"dockerComposeFile": "./docker-compose.yml",
   	"service": "devcontainer",
 
-	"forwardPorts": [
-		3000
-	],
+	// "forwardPorts": [
+	// 	3000
+	// ],
 	"customizations": {
 		"vscode": {
 			"settings": {
