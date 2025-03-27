@@ -5,6 +5,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
+    "test:integration": "jest --config jest.integration.config.js",
+    "test:unit": "jest --config jest.unit.config.js",
     "cdk": "cdk",
     "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/app-local.template.json"
   },
@@ -22,6 +24,7 @@
     "aws-cdk-lib": "2.184.1",
     "aws-cdk-local": "^2.19.2",
     "constructs": "^10.4.2",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "esbuild": "^0.25.1",
     "eslint": "^9.22.0",

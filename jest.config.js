@@ -14,3 +14,4 @@ export const moduleNameMapper = {
   '^@app/(.*)$': '<rootDir>/app/$1', // Map @app to the project root
   '^@utils/(.*)$': '<rootDir>/app/utils/$1', // Map @util to the project root
 };
+export const setupFiles = ['<rootDir>/jest.setup.js'];
