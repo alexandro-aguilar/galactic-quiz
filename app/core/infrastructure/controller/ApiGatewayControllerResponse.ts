@@ -1,12 +1,15 @@
 import HttpStatusCode from '@app/core/infrastructure/enum/httpStatusCode';
 
 export default class ApiGatewayControllerResponse<T> {
-  constructor(
-    private _body: T,
-    private _statusCode?: HttpStatusCode
-  ) {}
+  private _body?: T;
+  private _statusCode?: HttpStatusCode;
 
-  get body(): T {
+  constructor({body, statusCode}: {body?: T; statusCode?: HttpStatusCode}) {
+    this._body = body;
+    this._statusCode = statusCode;
+  }
+
+  get body(): T | undefined {
     return this._body;
   }
 

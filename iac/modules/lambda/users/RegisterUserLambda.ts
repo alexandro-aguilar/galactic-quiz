@@ -17,7 +17,7 @@ export default class RegisterUserLambda extends NodejsFunction {
     super(scope, `RegisterUserLambda`, {
       functionName: `RegisterUserLambda-${Environment.projectName}-${Environment.stage}`,
       runtime: Runtime.NODEJS_22_X,
-      entry: join(__dirname, '../../../../app/modules/user/register/UserRegisterHandler.ts'),
+      entry: join(__dirname, '../../../../app/modules/user/register/RegisterUserHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
       memorySize: 1024,
       architecture: Architecture.ARM_64,

@@ -1,14 +1,15 @@
 // .devcontainer/devcontainer.json
 {
 	"name": "Node Devcontainer",
+	"remoteEnv": {
+		"DOTENV_PATH": ".devcontainer/.env"
+	},
+	"dockerComposeFile": "./docker-compose.yml",
+  	"service": "devcontainer",
 
-	"dockerComposeFile": "../docker-compose.yml",
-	"service": "devcontainer",
-	
-	"workspaceFolder": "/workspaces/app",
-	// "forwardPorts": [
-	// 	3000
-	// ],
+	"forwardPorts": [
+		3000
+	],
 	"customizations": {
 		"vscode": {
 			"settings": {
@@ -16,7 +17,7 @@
 			}
 		}
 	},
-	"postCreateCommand": "yarn install",
+	"postCreateCommand": "yarn",
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind"
 	],

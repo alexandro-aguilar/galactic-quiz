@@ -10,3 +10,4 @@ coverage/
 .cdk.staging
 cdk.out
 .env
+.yarn/install-state.gz

@@ -3,7 +3,7 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import Environment from '../../../utils/Environment';
 
-export default class UserRegisterRepository {
+export default class RegisterUserRepository {
   private readonly client: DynamoDBDocumentClient;
 
   constructor() {
