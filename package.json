@@ -6,7 +6,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/GalacticQuiz.template.json"
+    "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/app-local.template.json"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
