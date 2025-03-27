@@ -1,17 +1,14 @@
 // .devcontainer/devcontainer.json
 {
 	"name": "Node Devcontainer",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": ".."
-	},
-	"runArgs": [
-		"--platform=linux/amd64"
-	],
-	"workspaceFolder": "/workspaces/galactic-quiz",
-	"forwardPorts": [
-		3000
-	],
+
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "devcontainer",
+	
+	"workspaceFolder": "/workspaces/app",
+	// "forwardPorts": [
+	// 	3000
+	// ],
 	"customizations": {
 		"vscode": {
 			"settings": {

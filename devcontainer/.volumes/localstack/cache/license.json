@@ -1,0 +1,33 @@
+{
+  "id": "825a5c72-0bf0-44fe-9ce8-e0c43d11ce0a",
+  "license_format": "1",
+  "signature": "9638f3a3cc64469a5e6eaf936e86b9f2b22fe76489de5df18538bec69f461875",
+  "license_type": "hobby",
+  "issue_date": "2025-03-26T19:12:54+00:00",
+  "expiry_date": "2025-10-11T20:09:48+00:00",
+  "products": [
+    {
+      "name": "localstack.stacks.preview",
+      "version": "*"
+    },
+    {
+      "name": "localstack.platform.plugin/chaos-basic",
+      "version": "*"
+    },
+    {
+      "name": "localstack.pods.public",
+      "version": "*"
+    },
+    {
+      "name": "localstack-pro",
+      "version": "*.*.*"
+    }
+  ],
+  "license_status": "ACTIVE",
+  "license_secret": "TFMxLjA6lPpeKX3ynFgXhsz/RSe/AMjowIc9dmkPXLRYjzBnReRODdKr5OWYve/BNBjorCgn",
+  "last_activated": "2025-03-27T18:05:15.104101Z",
+  "reactivate_after": "2025-03-28T18:05:15+00:00",
+  "offline_data": {
+    "localstack_version": "4.1.2.dev15"
+  }
+}

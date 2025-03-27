@@ -1,5 +1,5 @@
 # Imagen base con Node.js (x86_64)
-FROM --platform=linux/amd64 node:18-bullseye
+FROM --platform=linux/amd64 node:22-bullseye
 
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
@@ -22,6 +22,9 @@ RUN pip3 install aws-sam-cli
 
 # Habilitar Yarn con Corepack
 RUN corepack enable && corepack prepare yarn@4 --activate
+
+# Otras herramientas necesarias
+RUN pip3 install awscli-local
 
 # Establecer directorio de trabajo
 WORKDIR /workspaces/app

@@ -1,19 +1,25 @@
 version: '3.8'
 services:
-  vo:
+  devcontainer:
     build:
       context: .
-      dockerfile: .devcontainer/Dockerfile
+      dockerfile: Dockerfile
+    
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+    
     volumes:
-      - .:/workspaces/${APP_NAME:-app}:cached
+      - .:/workspaces/app:cached
     depends_on:
      - localstack
     networks:
-      - ${APP_NAME:-app}-network
+      - app-network
     command: sleep infinity
 
   localstack:
-    container_name: localstack-${APP_NAME:-app}
+    container_name: localstack-${PROJECT_NAME:-app}
     image: localstack/localstack-pro:latest
     ports:
       - "4566:4566"            # Puerto principal de LocalStack
@@ -28,16 +34,11 @@ services:
       #lets this config as is, requiered for localstack to communicate with docker
       - /var/run/docker.sock:/var/run/docker.sock
       
-      - localstack-${APP_NAME:-app}:/var/lib/localstack
-      - localstack-${APP_NAME:-app}-state:/tmp/localstack_state
+      - ./devcontainer/.volumes/localstack:/var/lib/localstack
+      - ./devcontainer/.volumes/localstack_state:/tmp/localstack_state
     networks:
-      - ${APP_NAME:-app}-network
-
-volumes:
-  ${APP_NAME:-app}-cached:
-  localstack-${APP_NAME:-app}:
-  localstack-${APP_NAME:-app}-state:
+      - app-network
 
 networks:
-  ${APP_NAME:-app}-network:
+ app-network:
     driver: bridge
