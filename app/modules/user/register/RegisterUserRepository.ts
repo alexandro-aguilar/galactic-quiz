@@ -7,7 +7,7 @@ import { injectable } from 'inversify';
 import UserAlreadyExistsError from './UserAlreadyExistsError';
 
 @injectable()
-export default class RegisterUserRepository implements Repository<User, User> {
+export default class RegisterUserRepository implements Repository<User, void> {
   private readonly client: DynamoDBDocumentClient;
 
   constructor() {
@@ -15,8 +15,7 @@ export default class RegisterUserRepository implements Repository<User, User> {
     this.client = DynamoDBDocumentClient.from(client);
   }
 
-  async execute(user: User): Promise<User> {
-    console.log('RegisterUserRepository', user, Environment);
+  async execute(user: User): Promise<void> {
     const params = {
       TableName: Environment.UsersTable,
       Item: user.toJSON(),
@@ -24,10 +23,7 @@ export default class RegisterUserRepository implements Repository<User, User> {
     };
     try {
       const command = new PutCommand(params);
-      const result = await this.client.send(command);
-      console.log('client', this.client);
-      console.log('Result', result);
-      return result.Attributes as User; // Assuming the result contains the created user
+      await this.client.send(command);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(error: any) {
       console.error('Error', error);
