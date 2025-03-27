@@ -2,6 +2,9 @@
 !.eslintrc.js
 !jest.config.js
 !commitlint.config.js
+!jest.integration.config.js
+!jest.unit.config.js
+!jest.setup.js
 *.d.ts
 node_modules/
 coverage/
