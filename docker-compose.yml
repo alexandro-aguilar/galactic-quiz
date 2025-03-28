@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   devcontainer:
     build:
@@ -30,6 +29,7 @@ services:
       - PERSISTENCE=true
       - STATE_DIR=/tmp/localstack_state
       - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - DEFAULT_REGION=us-east-1
     volumes:
       #lets this config as is, requiered for localstack to communicate with docker
       - /var/run/docker.sock:/var/run/docker.sock
@@ -40,5 +40,5 @@ services:
       - app-network
 
 networks:
- app-network:
+  app-network:
     driver: bridge

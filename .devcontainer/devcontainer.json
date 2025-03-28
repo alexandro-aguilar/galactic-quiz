@@ -2,14 +2,14 @@
 {
 	"name": "Node Devcontainer",
 	"remoteEnv": {
-		"DOTENV_PATH": ".devcontainer/.env"
+		"DOTENV_PATH": "../.env"
 	},
-	"dockerComposeFile": "./docker-compose.yml",
+	"dockerComposeFile": "../docker-compose.yml",
   	"service": "devcontainer",
-
-	"forwardPorts": [
-		3000
-	],
+	"workspaceFolder": "/workspaces/app",
+	// "forwardPorts": [
+	// 	3000
+	// ],
 	"customizations": {
 		"vscode": {
 			"settings": {
