@@ -17,3 +17,4 @@ cdk.out
 .devcontainer/.volumes/*
 .DS_Store
 iac/modules/layers/**/layer
+devcontainer
