@@ -5,8 +5,88 @@ on:
     branches:
       - dev
 
+env:
+  AWS_REGION: us-east-1
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+  STAGE: ${{ vars.STAGE }}
+  PROJECT_NAME: ${{ vars.PROJECT_NAME }}
+
 jobs:
+  install:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+    outputs:
+      cache-hit: ${{ steps.cache-deps.outputs.cache-hit }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 22
+
+    - name: Enable Corepack and activate Yarn
+      run: |
+        corepack enable
+        corepack prepare yarn@4 --activate
+    - name: Ensure Yarn cache directory exists
+      run: mkdir -p .yarn/cache
+
+    - name: Cache Yarn dependencies
+      id: cache-deps
+      uses: actions/cache@v3
+      with:
+        path: |
+          .yarn/cache
+          .yarn/unplugged
+          .pnp.*
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Install dependencies
+      run: yarn install
+
+  test:
+    needs: install
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 22
+
+    - name: Enable Corepack and activate Yarn
+      run: |
+        corepack enable
+        corepack prepare yarn@4 --activate
+
+    - name: Restore Yarn cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          .yarn/cache
+          .yarn/unplugged
+          .pnp.*
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Install dependencies (Yarn v3)
+      run: yarn install 
+
+    - name: Run tests
+      run: yarn test:unit --silent
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
     environment:
       name: dev
@@ -15,42 +95,51 @@ jobs:
       id-token: write
       contents: read
 
-    env:
-      AWS_REGION: us-east-1
-
     steps:
+
     - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Setup Node
-      uses : actions/setup-node@v3
+      uses: actions/setup-node@v3
       with:
-        node-version: 20
+        node-version: 22
 
-    - name: Install dependencies
-      run: yarn install --silent
+    - name: Enable Corepack and activate Yarn
+      run: |
+        corepack enable
+        corepack prepare yarn@4 --activate
 
-    - name: Test
-      run: yarn test --silent
+    - name: Restore Yarn cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          .yarn/cache
+          .yarn/unplugged
+          .pnp.*
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Install dependencies (Yarn v3)
+      run: yarn install 
 
     - name: Configure AWS credentials using OIDC
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::058632605534:role/GalacticQuizGithubActionsDeploy
-        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: ${{ env.AWS_ROLE_ARN }}
+        aws-region: ${{ vars.AWS_REGION }}
 
     - name: Get AWS Account ID
       run: |
         ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
         echo "AWS_ACCOUNT_ID=$ACCOUNT_ID" >> $GITHUB_ENV
 
-    - name: Use AWS Account ID
+    - name: Log AWS Account ID
       run: echo "AWS Account ID is $AWS_ACCOUNT_ID"
 
     - name: Install AWS CDK
       run: npm i -g aws-cdk
 
-    - name: CDK synthetize
+    - name: CDK synth
       run: cdk synth
 
     - name: Deploy CDK Stack

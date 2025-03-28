@@ -7,12 +7,14 @@ import { Construct } from 'constructs';
 import { join } from 'path';
 import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
 import LambdaStackProps from '../../../utils/LambdaStackProps';
+import Environment from '../../../utils/Environment';
 
 export default class SaveScoreLambda extends NodejsFunction {
   private readonly name;
 
   constructor(scope: Construct, props: LambdaStackProps) {
     super(scope, `SaveScoreLambda`, {
+      functionName: `SaveScoreLambda-${Environment.projectName}-${Environment.stage}`,
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts'),
       handler: 'handler', // Name of the exported handler function,

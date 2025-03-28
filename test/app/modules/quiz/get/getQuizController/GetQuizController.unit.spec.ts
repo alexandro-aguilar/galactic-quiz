@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import GetQuizController from '@app/modules/quiz/get/GetQuizController';
 import { APIGatewayProxyEventV2, APIGatewayProxyStructuredResultV2 } from 'aws-lambda';
 import { fixtures, fixtures2, mockQuiz } from './fixtures';
+import ResponseMapper from '@app/core/infrastructure/controller/ResponseMapper';
 
 describe('GetQuizController - Base Case', () => {
   let getQuizController: GetQuizController;
@@ -10,8 +12,7 @@ describe('GetQuizController - Base Case', () => {
   };
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getQuizController = new GetQuizController(mockGetQuizRepository as any);
+    getQuizController = new GetQuizController(new ResponseMapper(), mockGetQuizRepository as any);
   });
 
   test.each(fixtures)(
@@ -38,8 +39,7 @@ describe('GetQuizController - Error', () => {
   };
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getQuizController = new GetQuizController(mockGetQuizRepository as any);
+    getQuizController = new GetQuizController(new ResponseMapper(), mockGetQuizRepository as any);
   });
 
   test.each(fixtures2)(

@@ -1,11 +1,11 @@
-# com-day-aws-2024
+# Galactic Quiz
 
 This application is the backend implementation of a Caylent quiz deployed at AWS Community Day 2024. 
 
 ## Setup
 
 Make sure you have the following installed:
-- `yarn`
+- `yarn v3 (corepack)`
 - `aws-sam-cli` 
   - For macOS users, you can install via `brew install aws-sam-cli`
 - Docker
@@ -17,7 +17,7 @@ yarn dev
 ```
 
 ## Deployment
-There is currently a pipeline in place listening to the `main` branch. Any changes to that branch will be deployed using CloudFormation alongside GitHub actions in the background.
+There is currently a pipeline in place listening to the `dev` branch. Any changes to that branch will be deployed using CloudFormation alongside GitHub actions in the background.
 
 > [!NOTE]  
 > The `.env.example` file is only in place for manual deployments, so there is no need to configure those variables by hand.

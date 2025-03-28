@@ -1,4 +1,4 @@
-import HttpStatusCode from '@app/utils/httpStatusCode';
+import HttpStatusCode from "@app/core/infrastructure/enum/httpStatusCode";
 
 export const mockQuiz = {
   toJson: () => ([
@@ -46,4 +46,4 @@ export const fixtures = [
 
 export const fixtures2 = [
   { pathParameters: { type: -2 }, headers: {}, expectedStatus: HttpStatusCode.INTERNAL_SERVER_ERROR, expectedResponse: '{"message":"Internal Server Error"}' },
-]
+];

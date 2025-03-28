@@ -1,3 +1,5 @@
+import AnswerDto from "./AnswerDto";
+
 export default class Answer {
   private id: number;
   private text: string;
@@ -15,7 +17,7 @@ export default class Answer {
     return this.text;
   }
 
-  toJson() {
+  toJson(): AnswerDto {
     return {
       id: this.id,
       text: this.text

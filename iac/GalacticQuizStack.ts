@@ -1,4 +1,3 @@
-import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { QuizStack } from './modules/lambda/quiz/QuizStack';
 import { Role, ServicePrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
@@ -8,9 +7,12 @@ import GalacticQuizAPIGatewayStack from './modules/apigateway/GalacticQuizAPIGat
 import LambdaStackProps from './utils/LambdaStackProps';
 import GalacticQuizUsersDynamoStack from './modules/dynamoDB/GalacticQuizUsersDynamoStack';
 import GalacticQuizQuestionsBucketStack from './modules/s3/GalacticQuizQuestionsBucketStack';
+import { Stack, StackProps, Tags } from 'aws-cdk-lib';
+import Environment from './utils/Environment';
+import LayersStack from './modules/layers/LayersStack';
 
-export default class GalacticQuizStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+export default class GalacticQuizStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     const role = new Role(this, 'LambdaExecutionRole', {
@@ -41,5 +43,10 @@ export default class GalacticQuizStack extends cdk.Stack {
     new UserStack(this, lambdaStackProps);
 
     new ScoreStack(this, lambdaStackProps);
+
+    new LayersStack(this, lambdaStackProps);
+
+    Tags.of(this).add('project', Environment.projectName);
+    Tags.of(this).add('environment', Environment.stage);
   }
 }

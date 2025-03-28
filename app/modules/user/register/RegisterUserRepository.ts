@@ -2,8 +2,12 @@ import User from './User';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 import Environment from '../../../utils/Environment';
+import Repository from '@app/core/domain/repository/Repository';
+import { injectable } from 'inversify';
+import UserAlreadyExistsError from './UserAlreadyExistsError';
 
-export default class UserRegisterRepository {
+@injectable()
+export default class RegisterUserRepository implements Repository<User, void> {
   private readonly client: DynamoDBDocumentClient;
 
   constructor() {
@@ -11,7 +15,7 @@ export default class UserRegisterRepository {
     this.client = DynamoDBDocumentClient.from(client);
   }
 
-  async execute(user: User): Promise<boolean> {
+  async execute(user: User): Promise<void> {
     const params = {
       TableName: Environment.UsersTable,
       Item: user.toJSON(),
@@ -20,14 +24,13 @@ export default class UserRegisterRepository {
     try {
       const command = new PutCommand(params);
       await this.client.send(command);
-      return true;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(error: any) {
-      console.error('Error', error);
       if (error.name === 'ConditionalCheckFailedException') {
-        return false;
+        throw new UserAlreadyExistsError();
+      } else {
+        throw error;
       }
-      throw error;
     }
   }
 }

@@ -1,20 +1,28 @@
-import GetQuizRepository from './GetQuizRepository';
-import { APIGatewayProxyEventV2 } from 'aws-lambda';
+import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import Quiz from './Quiz';
-import BaseAPIGatewayController from '@app/common/controller/BaseAPIGatewayController';
-import ApiGatewayControllerResponse from '@app/common/controller/ApiGatewayControllerResponse';
+import BaseAPIGatewayController from '@app/core/infrastructure/controller/BaseAPIGatewayController';
+import ApiGatewayControllerResponse from '@app/core/infrastructure/controller/ApiGatewayControllerResponse';
+import { inject, injectable } from 'inversify';
+import types from './types';
+import Repository from '@app/core/domain/repository/Repository';
+import QuizDto from './QuizDto';
+import BaseMapper from '@app/core/domain/mapper/BaseMapper';
 
-export default class GetQuizController extends BaseAPIGatewayController<object> {
+@injectable()
+export default class GetQuizController extends BaseAPIGatewayController<QuizDto> {
   constructor(
-    private readonly getQuizRepository = new GetQuizRepository()
+    @inject(types.ResponseMapper) responseMapper: BaseMapper<ApiGatewayControllerResponse<QuizDto>, APIGatewayProxyResultV2>,
+    @inject(types.GetQuizRepository) private readonly getQuizRepository: Repository<number, Quiz>
   ) {
-    super();
+    super(
+      responseMapper,
+    );
   }
 
-  async run(request: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<object>> {
-    const type: number = request.pathParameters?.type as unknown as number ?? 1;
+  protected async run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<QuizDto>> {
+    const type: number = event.pathParameters?.type as unknown as number ?? 1;
     const quiz: Quiz = await this.getQuizRepository.execute(type);
-    const response = new ApiGatewayControllerResponse<object>(quiz.toJson());
+    const response = new ApiGatewayControllerResponse<QuizDto>({body: quiz.toJson()});
     return response;
   }
 }

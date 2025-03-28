@@ -2,6 +2,9 @@
 !.eslintrc.js
 !jest.config.js
 !commitlint.config.js
+!jest.integration.config.js
+!jest.unit.config.js
+!jest.setup.js
 *.d.ts
 node_modules/
 coverage/
@@ -10,3 +13,7 @@ coverage/
 .cdk.staging
 cdk.out
 .env
+.yarn/*
+.devcontainer/.volumes/*
+.DS_Store
+iac/modules/layers/**/layer

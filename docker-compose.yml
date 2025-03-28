@@ -1,0 +1,44 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
+    
+    volumes:
+      - .:/workspaces/app:cached
+    depends_on:
+     - localstack
+    networks:
+      - app-network
+    command: sleep infinity
+
+  localstack:
+    container_name: localstack-${PROJECT_NAME:-app}
+    image: localstack/localstack-pro:latest
+    ports:
+      - "4566:4566"            # Puerto principal de LocalStack
+      - "4510-4559:4510-4559"  # Rango de puertos para servicios externos
+    environment:
+      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
+      - DEBUG=${LOCALSTACK_DEBUG:-0}
+      - PERSISTENCE=true
+      - STATE_DIR=/tmp/localstack_state
+      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
+      - DEFAULT_REGION=us-east-1
+    volumes:
+      #lets this config as is, requiered for localstack to communicate with docker
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+      - ./devcontainer/.volumes/localstack:/var/lib/localstack
+      - ./devcontainer/.volumes/localstack_state:/tmp/localstack_state
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

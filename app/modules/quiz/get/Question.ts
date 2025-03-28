@@ -1,4 +1,5 @@
 import Answer from './Answer';
+import QuestionDto from './QuestionDto';
 
 export default class Question {
   private id: number;
@@ -39,7 +40,7 @@ export default class Question {
     return this.rightAnswer;
   }
 
-  toJson() {
+  toJson(): QuestionDto {
     return {
       id: this.id,
       type: this.type,

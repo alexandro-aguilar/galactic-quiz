@@ -16,7 +16,7 @@ export default class GalacticQuizQuestionsBucketStack extends NestedStack {
       versioned: true,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       removalPolicy: RemovalPolicy.DESTROY,
-      autoDeleteObjects: true
+      autoDeleteObjects: true,
     });
 
     new BucketDeployment(this, 'DeployFiles', {
