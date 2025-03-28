@@ -8,7 +8,7 @@ import BaseMapper from '@app/core/domain/mapper/BaseMapper';
 export default class ResponseMapper<T> extends BaseMapper<ApiGatewayControllerResponse<T>, APIGatewayProxyResultV2> {
   protected transform(response: ApiGatewayControllerResponse<T> & { headers: object }): APIGatewayProxyResultV2 {
     return {
-      statusCode: HttpStatusCode.OK ?? response.statusCode,
+      statusCode: response.statusCode ?? HttpStatusCode.OK,
       body: JSON.stringify(response.body),
       headers: {
         ...response.headers,

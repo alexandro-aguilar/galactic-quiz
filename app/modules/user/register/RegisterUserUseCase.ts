@@ -18,7 +18,6 @@ export default class RegisterUserUseCase implements UseCase<User, Promise<boolea
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     catch (error: any) {
-      console.error(error);
       if (error instanceof UserAlreadyExistsError) {
         return false;
       } else {

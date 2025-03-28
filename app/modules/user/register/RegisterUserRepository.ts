@@ -26,7 +26,6 @@ export default class RegisterUserRepository implements Repository<User, void> {
       await this.client.send(command);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch(error: any) {
-      console.error('Error', error);
       if (error.name === 'ConditionalCheckFailedException') {
         throw new UserAlreadyExistsError();
       } else {
