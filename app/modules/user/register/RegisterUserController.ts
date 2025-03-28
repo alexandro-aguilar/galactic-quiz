@@ -1,4 +1,4 @@
-import { APIGatewayProxyEventV2 } from 'aws-lambda';
+import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import User from './User';
 import HttpStatusCode from '../../../core/infrastructure/enum/httpStatusCode';
 import UserDto from './UserDto';
@@ -7,13 +7,17 @@ import ApiGatewayControllerResponse from '@app/core/infrastructure/controller/Ap
 import { inject, injectable } from 'inversify';
 import types from './types';
 import UseCase from '@app/core/application/useCase/UseCase';
+import BaseMapper from '@app/core/domain/mapper/BaseMapper';
 
 @injectable()
 export default class RegisterUserController extends BaseAPIGatewayController<void> {
   constructor(
+    @inject(types.ResponseMapper) responseMapper: BaseMapper<ApiGatewayControllerResponse<void>, APIGatewayProxyResultV2>,
     @inject(types.RegisterUserUseCase) private readonly registerUserUseCase: UseCase<User, Promise<boolean>>
   ) {
-    super();
+    super(
+      responseMapper,
+    );
   }
 
   async run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<void>> {
