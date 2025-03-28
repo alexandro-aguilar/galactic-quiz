@@ -136,6 +136,19 @@ jobs:
     - name: Log AWS Account ID
       run: echo "AWS Account ID is $AWS_ACCOUNT_ID"
 
+    - name: Build layers
+      run: |
+        cd iac/modules/layers/commonLayer/layer
+        yarn workspaces focus --production
+
+        # for layer in $(ls ../layers); do
+        #   echo "Building layer $layer"
+        #   cd $layer
+        #   yarn install --production --frozen-lockfile
+        #   zip -r ../$layer.zip .
+        #   cd ..
+        # done
+
     - name: Install AWS CDK
       run: npm i -g aws-cdk
 

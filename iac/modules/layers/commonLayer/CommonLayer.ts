@@ -1,7 +1,6 @@
 import { Architecture, Code, LayerVersion, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
-import Environment from 'iac/utils/Environment';
-// import * as path from 'path';
+import Environment from '../../../utils/Environment';
 
 export default class CommonLayer extends LayerVersion {
   constructor(scope: Construct, id: string) {
