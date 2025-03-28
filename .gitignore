@@ -16,5 +16,5 @@ cdk.out
 .yarn/*
 .devcontainer/.volumes/*
 .DS_Store
-.yarn/install-state.gz
+iac/modules/layers/**/layer
 devcontainer
