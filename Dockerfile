@@ -31,4 +31,4 @@ RUN pip3 install awscli-local
 WORKDIR /workspaces/app
 
 # Comando por defecto
-CMD [ "bash", "socat TCP-LISTEN:4566,reuseaddr,fork TCP:localstack:4566 &" ]
+CMD [ "bash" ]
