@@ -1,14 +1,14 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
 import Controller from './Controller';
 import ApiGatewayControllerResponse from './ApiGatewayControllerResponse';
-import { inject, injectable } from 'inversify';
-import types from '../../presentation/coreTypes';
+import { injectable } from 'inversify';
 import BaseMapper from '@app/core/domain/mapper/BaseMapper';
 
 @injectable()
 export default abstract class BaseAPIGatewayController<Response> implements Controller<APIGatewayProxyEventV2, APIGatewayProxyResultV2> {
+  
   constructor(
-    @inject(types.ResponseMapper) private readonly responseMapper?: BaseMapper<ApiGatewayControllerResponse<Response>, APIGatewayProxyResultV2>
+    private readonly responseMapper: BaseMapper<ApiGatewayControllerResponse<Response>, APIGatewayProxyResultV2>
   ) {}
 
   protected abstract run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<Response>>;

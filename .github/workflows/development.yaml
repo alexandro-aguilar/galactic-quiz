@@ -83,7 +83,7 @@ jobs:
       run: yarn install 
 
     - name: Run tests
-      run: yarn test --silent
+      run: yarn test:unit --silent
 
   deploy:
     needs: test

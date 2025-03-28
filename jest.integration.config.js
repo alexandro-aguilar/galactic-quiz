@@ -1,7 +1,7 @@
 export const preset = 'ts-jest';
 export const testEnvironment = 'node';
 export const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx'];
-export const testRegex = '\\.(test|spec)\\.[t]s$';
+export const testRegex = '\\integration.(test|spec)\\.[t]s$';
 export const roots = ['<rootDir>/test'];
 export const transform = {
   '^.+\\.tsx?$': 'ts-jest'
