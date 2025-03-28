@@ -4,19 +4,19 @@ import QuizDto from './QuizDto';
 import QuizQuestionsDTO from './QuizQuestionsDTO';
 
 export default class Quiz {
-  private questions: Array<Question>;
+  private _questions: Array<Question>;
 
   constructor(questions: Array<Question>) {
-    this.questions = questions;
+    this._questions = questions;
   }
 
-  get Questions(): Array<Question> {
-    return this.questions;
+  get questions(): Array<Question> {
+    return this._questions;
   }
 
   toJson(): QuizDto {
     return {
-      questions: this.questions.map(question => question.toJson())
+      questions: this._questions.map(question => question.toJson())
     };
   }
 
