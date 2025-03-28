@@ -12,8 +12,7 @@ describe('GetQuizController - Base Case', () => {
   };
 
   beforeEach(() => {
-    getQuizController = new GetQuizController(mockGetQuizRepository as any);
-    (getQuizController as any).responseMapper = new ResponseMapper();
+    getQuizController = new GetQuizController(new ResponseMapper(), mockGetQuizRepository as any);
   });
 
   test.each(fixtures)(
@@ -40,7 +39,7 @@ describe('GetQuizController - Error', () => {
   };
 
   beforeEach(() => {
-    getQuizController = new GetQuizController(mockGetQuizRepository as any);
+    getQuizController = new GetQuizController(new ResponseMapper(), mockGetQuizRepository as any);
   });
 
   test.each(fixtures2)(
