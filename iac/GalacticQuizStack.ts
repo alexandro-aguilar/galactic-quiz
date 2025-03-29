@@ -31,20 +31,24 @@ export default class GalacticQuizStack extends Stack {
     const comDayQuestionsBucketStack = new GalacticQuizQuestionsBucketStack(this, {});
     const bucket = comDayQuestionsBucketStack.bucket;
 
+    const layerStack = new LayersStack(this, {});
+
+    const commonLayer = layerStack.commonLayer;
+
     const lambdaStackProps: LambdaStackProps = {
       role,
       api,
       table,
-      bucket
+      bucket,
+      layer: commonLayer
     }
-    
+
     new QuizStack(this, lambdaStackProps);
 
     new UserStack(this, lambdaStackProps);
 
     new ScoreStack(this, lambdaStackProps);
 
-    new LayersStack(this, lambdaStackProps);
 
     Tags.of(this).add('project', Environment.projectName);
     Tags.of(this).add('environment', Environment.stage);
