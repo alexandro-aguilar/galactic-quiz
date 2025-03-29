@@ -9,7 +9,9 @@
     "test:unit": "jest --config jest.unit.config.js",
     "cdk": "cdk",
     "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/app-local.template.json",
-    "bootstrap": "AWS_ACCESS_KEY_ID=test AWS_SECRET_ACCESS_KEY=test AWS_DEFAULT_REGION=us-east-1 AWS_ENDPOINT_URL=localstack yarn cdklocal bootstrap --verbose"
+    "deploy": "yarn cdklocal deploy --verbose",
+    "synth": "yarn cdklocal synth --verbose",
+    "bootstrap": "yarn cdklocal bootstrap --verbose"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
