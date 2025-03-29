@@ -138,6 +138,9 @@ jobs:
 
     - name: Build layers
       run: |
+        mkdir -p iac/modules/layers/commonLayer/layer/nodejs
+        cp -R package.json iac/modules/layers/commonLayer/layer/nodejs/package.json
+        cp -R package-lock.json iac/modules/layers/commonLayer/layer/nodejs/package-lock.json
         cd iac/modules/layers/commonLayer/layer
         yarn workspaces focus --production
 
