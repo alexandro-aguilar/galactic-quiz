@@ -142,8 +142,10 @@ jobs:
         mkdir -p iac/modules/layers/commonLayer/layer/nodejs
         cp -R package.json iac/modules/layers/commonLayer/layer/nodejs
         cp -R yarn.lock iac/modules/layers/commonLayer/layer/nodejs
-        cd iac/modules/layers/commonLayer/layer
+        cd iac/modules/layers/commonLayer/layer/nodejs
+        ls
         yarn workspaces focus --production
+        ls 
 
         # for layer in $(ls ../layers); do
         #   echo "Building layer $layer"
