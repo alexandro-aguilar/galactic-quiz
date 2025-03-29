@@ -140,8 +140,8 @@ jobs:
       run: |
         ls
         mkdir -p iac/modules/layers/commonLayer/layer/nodejs
-        cp -R package.json iac/modules/layers/commonLayer/layer/nodejs/package.json
-        cp -R package-lock.json iac/modules/layers/commonLayer/layer/nodejs/yarn.lock
+        cp -R package.json iac/modules/layers/commonLayer/layer/nodejs
+        cp -R yarn.lock iac/modules/layers/commonLayer/layer/nodejs
         cd iac/modules/layers/commonLayer/layer
         yarn workspaces focus --production
 
