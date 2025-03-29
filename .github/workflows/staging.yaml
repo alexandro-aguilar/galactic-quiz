@@ -1,4 +1,4 @@
-name: Development
+name: Staging
 
 on:
   push:
