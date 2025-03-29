@@ -9,6 +9,7 @@ const esbuildBundlingConfig = {
   target: 'node22',    // Set the target environment for esbuild
   sourceMap: true,
   sourcesContent: false,
+  exclude: ['.yarn/**']
 }
 
 export default esbuildBundlingConfig;
