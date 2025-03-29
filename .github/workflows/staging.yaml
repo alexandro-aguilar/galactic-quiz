@@ -1,4 +1,4 @@
-name: Development
+name: Staging
 
 on:
   push:
@@ -7,11 +7,15 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  AWS_ROLE_ARN: secrets.AWS_ROLE_ARN
+  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+  STAGE: ${{ vars.STAGE }}
+  PROJECT_NAME: ${{ vars.PROJECT_NAME }}
 
 jobs:
   install:
     runs-on: ubuntu-latest
+    environment:
+      name: staging
     outputs:
       cache-hit: ${{ steps.cache-deps.outputs.cache-hit }}
 
@@ -27,12 +31,11 @@ jobs:
     - name: Enable Corepack and activate Yarn
       run: |
         corepack enable
-        corepack prepare yarn@stable --activate
+        corepack prepare yarn@4 --activate
     - name: Ensure Yarn cache directory exists
-
       run: mkdir -p .yarn/cache
-    - name: Cache Yarn dependencies
 
+    - name: Cache Yarn dependencies
       id: cache-deps
       uses: actions/cache@v3
       with:
@@ -44,12 +47,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-yarn-
 
-    - name: Install dependencies (Yarn v3)
-      run: yarn install 
+    - name: Install dependencies
+      run: yarn install
 
   test:
     needs: install
     runs-on: ubuntu-latest
+    environment:
+      name: staging
 
     steps:
     - name: Checkout repository
@@ -63,7 +68,7 @@ jobs:
     - name: Enable Corepack and activate Yarn
       run: |
         corepack enable
-        corepack prepare yarn@stable --activate
+        corepack prepare yarn@4 --activate
 
     - name: Restore Yarn cache
       uses: actions/cache@v3
@@ -78,13 +83,13 @@ jobs:
       run: yarn install 
 
     - name: Run tests
-      run: yarn test --silent
+      run: yarn test:unit --silent
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     environment:
-      name: dev
+      name: staging
 
     permissions:
       id-token: write
@@ -103,7 +108,7 @@ jobs:
     - name: Enable Corepack and activate Yarn
       run: |
         corepack enable
-        corepack prepare yarn@stable --activate
+        corepack prepare yarn@4 --activate
 
     - name: Restore Yarn cache
       uses: actions/cache@v3
@@ -120,8 +125,8 @@ jobs:
     - name: Configure AWS credentials using OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: ${{ env.AWS_ROLE_ARN }}y
-        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: ${{ env.AWS_ROLE_ARN }}
+        aws-region: ${{ vars.AWS_REGION }}
 
     - name: Get AWS Account ID
       run: |
@@ -131,8 +136,29 @@ jobs:
     - name: Log AWS Account ID
       run: echo "AWS Account ID is $AWS_ACCOUNT_ID"
 
+    - name: Build layers
+      run: |
+        ls
+        mkdir -p iac/modules/layers/commonLayer/layer/nodejs
+        cp -R package.json iac/modules/layers/commonLayer/layer/nodejs
+        cp -R yarn.lock iac/modules/layers/commonLayer/layer/nodejs
+        cd iac/modules/layers/commonLayer/layer/nodejs
+        ls
+        yarn workspaces focus --production
+        ls 
+
+        # for layer in $(ls ../layers); do
+        #   echo "Building layer $layer"
+        #   cd $layer
+        #   yarn install --production --frozen-lockfile
+        #   zip -r ../$layer.zip .
+        #   cd ..
+        # done
+
     - name: Install AWS CDK
-      run: npm i -g aws-cdk
+      run: |
+        ls
+        npm i -g aws-cdk
 
     - name: CDK synth
       run: cdk synth

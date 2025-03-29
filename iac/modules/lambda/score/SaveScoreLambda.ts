@@ -18,6 +18,7 @@ export default class SaveScoreLambda extends NodejsFunction {
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
+      layers: [props.layer],
       memorySize: 1024,
       architecture: Architecture.ARM_64,
       tracing: Tracing.ACTIVE,
