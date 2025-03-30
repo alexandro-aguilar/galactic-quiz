@@ -16,6 +16,7 @@ export default class GalacticQuizStack extends Stack {
     super(scope, id, props);
 
     const role = new Role(this, 'LambdaExecutionRole', {
+      roleName: `GalacticQuizLambdaExecutionRole-${Environment.projectName}-${Environment.stage}`,
       assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
       managedPolicies: [
         ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole'),
