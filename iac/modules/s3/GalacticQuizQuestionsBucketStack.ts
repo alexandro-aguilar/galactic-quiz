@@ -12,7 +12,7 @@ export default class GalacticQuizQuestionsBucketStack extends NestedStack {
   constructor(scope: Construct, props?: StackProps) {
     super(scope, 'GalacticQuizQuestionsBucketStack', props);
     this._bucket = new Bucket(this, 'GalacticQuizQuestionsBucket', {
-      bucketName: `${Environment.accountId}-galactic-quiz-questions`,
+      bucketName: `${Environment.accountId}-questions-${Environment.projectName}-${Environment.stage}`,
       versioned: true,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       removalPolicy: RemovalPolicy.DESTROY,
