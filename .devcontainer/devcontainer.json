@@ -1,6 +1,6 @@
 // .devcontainer/devcontainer.json
 {
-	"name": "Node Devcontainer",
+	"name": "Localstack + Node Devcontainer",
 	"remoteEnv": {
 		"DOTENV_PATH": "../.env"
 	},
@@ -17,7 +17,8 @@
 			}
 		}
 	},
-	"postCreateCommand": "yarn",
+	// "postCreateCommand": "yarn && socat TCP-LISTEN:4566,reuseaddr,fork TCP:localstack:4566 &",
+	"postCreateCommand": "socat TCP-LISTEN:4566,reuseaddr,fork TCP:localstack:4566 && disown",
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind"
 	],

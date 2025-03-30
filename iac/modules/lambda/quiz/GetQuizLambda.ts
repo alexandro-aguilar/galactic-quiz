@@ -19,6 +19,7 @@ export class GetQuizLambda extends NodejsFunction {
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/quiz/get/GetQuizHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
+      layers: [props.layer],
       memorySize: 1024,
       timeout: Duration.seconds(60),
       architecture: Architecture.ARM_64,
