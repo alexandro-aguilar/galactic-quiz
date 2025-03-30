@@ -24,7 +24,10 @@ export default class SaveScoreLambda extends NodejsFunction {
       tracing: Tracing.ACTIVE,
       role: props.role,
       environment: {
-        USERS_TABLE: props.table.tableName
+        USERS_TABLE: props.table.tableName,
+        POWERTOOLS_SERVICE_NAME: 'SaveScoreLambda',
+        POWERTOOLS_LOG_LEVEL: Environment.logLevel,
+        POWERTOOLS_METRICS_NAMESPACE: Environment.projectName,
       },
       bundling: esbuildBundlingConfig,
     });

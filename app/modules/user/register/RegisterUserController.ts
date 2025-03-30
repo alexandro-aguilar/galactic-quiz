@@ -8,6 +8,7 @@ import { inject, injectable } from 'inversify';
 import types from './types';
 import UseCase from '@app/core/application/useCase/UseCase';
 import BaseMapper from '@app/core/domain/mapper/BaseMapper';
+import { logMethod } from '@app/core/decorators/logMethod';
 
 @injectable()
 export default class RegisterUserController extends BaseAPIGatewayController<void> {
@@ -20,6 +21,7 @@ export default class RegisterUserController extends BaseAPIGatewayController<voi
     );
   }
 
+  @logMethod()
   async run(event: APIGatewayProxyEventV2): Promise<ApiGatewayControllerResponse<void>> {
     const body: UserDto = JSON.parse(event.body as string);
     const user = new User(body.email, body.practice, body.name);

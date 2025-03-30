@@ -26,7 +26,10 @@ export class GetQuizLambda extends NodejsFunction {
       tracing: Tracing.ACTIVE,
       role: props.role,
       environment: {
-        QUIZ_BUCKET: props.bucket.bucketName
+        QUIZ_BUCKET: props.bucket.bucketName,
+        POWERTOOLS_SERVICE_NAME: 'GetQuizLambda',
+        POWERTOOLS_LOG_LEVEL: Environment.logLevel,
+        POWERTOOLS_METRICS_NAMESPACE: Environment.projectName,
       },
       bundling: esbuildBundlingConfig,
     });

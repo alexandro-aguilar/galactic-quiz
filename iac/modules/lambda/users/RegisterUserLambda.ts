@@ -24,7 +24,10 @@ export default class RegisterUserLambda extends NodejsFunction {
       architecture: Architecture.ARM_64,
       role: props.role,
       environment: {
-        USERS_TABLE: props.table.tableName
+        USERS_TABLE: props.table.tableName,
+        POWERTOOLS_SERVICE_NAME: 'RegisterUserLambda',
+        POWERTOOLS_LOG_LEVEL: Environment.logLevel,
+        POWERTOOLS_METRICS_NAMESPACE: Environment.projectName,
       },
       bundling: esbuildBundlingConfig,
     });

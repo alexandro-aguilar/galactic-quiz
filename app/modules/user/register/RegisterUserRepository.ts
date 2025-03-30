@@ -5,6 +5,7 @@ import Environment from '../../../utils/Environment';
 import Repository from '@app/core/domain/repository/Repository';
 import { injectable } from 'inversify';
 import UserAlreadyExistsError from './UserAlreadyExistsError';
+import { logMethod } from '@app/core/decorators/logMethod';
 
 @injectable()
 export default class RegisterUserRepository implements Repository<User, void> {
@@ -15,6 +16,7 @@ export default class RegisterUserRepository implements Repository<User, void> {
     this.client = DynamoDBDocumentClient.from(client);
   }
 
+  @logMethod()
   async execute(user: User): Promise<void> {
     const params = {
       TableName: Environment.UsersTable,

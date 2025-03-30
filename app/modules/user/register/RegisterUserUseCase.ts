@@ -4,6 +4,7 @@ import Repository from '@app/core/domain/repository/Repository';
 import User from './User';
 import UserAlreadyExistsError from './UserAlreadyExistsError';
 import UseCase from '@app/core/application/useCase/UseCase';
+import { logMethod } from '@app/core/decorators/logMethod';
 
 @injectable()
 export default class RegisterUserUseCase implements UseCase<User, Promise<boolean>> {
@@ -11,6 +12,7 @@ export default class RegisterUserUseCase implements UseCase<User, Promise<boolea
     @inject(types.RegisterUserRepository) private readonly registerUserRepository: Repository<User, User>
   ) {}
 
+  @logMethod()
   async execute(user: User): Promise<boolean> {
     try {
       await this.registerUserRepository.execute(user);
