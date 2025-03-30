@@ -4,7 +4,7 @@ import { APIGatewayProxyEventV2, APIGatewayProxyStructuredResultV2 } from 'aws-l
 import { DeleteItemCommand, DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import Environment from '@app/utils/Environment';
 
-describe('GetQuizController - Base Case', () => {
+describe('RegisterUser - Integration', () => {
 
   test.each(fixtures)('Given a user registration request $body, when the handler is invoked, then it should return status $expectedStatus and handle the user data correctly.',
     async ({ body, headers, expectedStatus }) => {
