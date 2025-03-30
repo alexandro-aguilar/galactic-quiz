@@ -18,3 +18,4 @@ cdk.out
 .DS_Store
 iac/modules/layers/**/layer
 devcontainer
+.dist
