@@ -4,6 +4,8 @@ const esbuildBundlingConfig = {
     '@aws-sdk',
     'inversify',
     'reflect-metadata',
+    '@aws-lambda-powertools',
+    '@aws-cdk'
   ], // Exclude specific modules from bundling
   nodeModules: [],     // Include specific modules in the bundle
   target: 'node22',    // Set the target environment for esbuild
