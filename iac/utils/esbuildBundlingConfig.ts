@@ -9,7 +9,23 @@ const esbuildBundlingConfig = {
   target: 'node22',    // Set the target environment for esbuild
   sourceMap: true,
   sourcesContent: false,
-  exclude: ['*']
+  exclude: ['*'],
+  commandHooks: {
+    beforeBundling(): string[] {
+      return [];
+    },
+    beforeInstall(): string[] {
+      return [];
+    },
+    afterBundling(inputDir: string, outputDir: string): string[] {
+      return [
+        // Remove .yarn directory from the output
+        `rm -rf ${outputDir}/.yarn`,
+        `rm -rf ${outputDir}/yarn.lock`,
+        `rm -rf ${outputDir}/package.json`,
+      ];
+    }
+  },
 }
 
 export default esbuildBundlingConfig;
