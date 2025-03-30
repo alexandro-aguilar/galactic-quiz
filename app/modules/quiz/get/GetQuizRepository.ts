@@ -4,6 +4,7 @@ import QuizQuestionsDTO from './QuizQuestionsDTO';
 import Environment from '../../../utils/Environment';
 import { injectable } from 'inversify';
 import Repository from '@app/core/domain/repository/Repository';
+import { logMethod } from '@app/core/decorators/logMethod';
 
 @injectable()
 export default class GetQuizRepository implements Repository<number, Quiz> {
@@ -16,6 +17,7 @@ export default class GetQuizRepository implements Repository<number, Quiz> {
     this.bucket = Environment.QuizBucket;
   }
 
+  @logMethod()
   async execute(type: number): Promise<Quiz> {
     const command = new GetObjectCommand({
       Bucket: this.bucket,

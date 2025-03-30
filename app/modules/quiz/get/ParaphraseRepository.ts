@@ -1,6 +1,7 @@
 import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime'; 
 import Question from './Question';
 import Quiz from './Quiz';
+import { logMethod } from '@app/core/decorators/logMethod';
 
 
 export default class ParaphraseRepository {
@@ -11,6 +12,7 @@ export default class ParaphraseRepository {
     this.bedrockClient = new BedrockRuntimeClient({ region: 'us-east-1' })
   }
 
+  @logMethod()
   async execute(questions: Array<Question>): Promise<Quiz> {
     const accept = 'application/json';
     const contentType = 'application/json';
