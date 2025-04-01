@@ -12,7 +12,7 @@ export default class RegisterUserRepository implements Repository<User, void> {
   private readonly client: DynamoDBDocumentClient;
 
   constructor() {
-    const client = new DynamoDBClient({ region: 'us-east-1' });
+    const client = new DynamoDBClient({ region: 'us-east-1', endpoint: Environment.LocalEndpoint });
     this.client = DynamoDBDocumentClient.from(client);
   }
 
