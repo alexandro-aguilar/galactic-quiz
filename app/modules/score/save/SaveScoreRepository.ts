@@ -12,6 +12,7 @@ import Environment from '../../../utils/Environment';
 import Score from './Score';
 //Repository
 import Repository from '@app/core/domain/repository/Repository';
+import ScoreAlreadyExistsError from './ScoreAlreadyExistsError';
 
 @injectable()
 export default class SaveScoreRepository  implements Repository<Score, void> {
@@ -23,6 +24,7 @@ export default class SaveScoreRepository  implements Repository<Score, void> {
   }
   @logMethod()
   async execute(score: Score): Promise<void> {
+    try{
       const command = new UpdateCommand({
         TableName: Environment.UsersTable,
         Key: {
@@ -37,5 +39,18 @@ export default class SaveScoreRepository  implements Repository<Score, void> {
       });
   
       await this.client.send(command);
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch(error: any) {
+      if (error.name === 'ConditionalCheckFailedException') {
+         //If the score already exists, we throw a domain error
+        //This is because we want to handle the error in the caller
+        throw new ScoreAlreadyExistsError();
+      } else {
+         //If the error is not a ConditionalCheckFailedException, we want to throw the error
+        //This is because we want to handle the error in the caller
+        throw error;
+      }
+    }
   }
 }

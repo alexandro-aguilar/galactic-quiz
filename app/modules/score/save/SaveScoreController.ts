@@ -34,7 +34,7 @@ export default class RegisterUserController extends BaseAPIGatewayController<voi
     const body: ScoreDto = JSON.parse(event.body as string);
     const score = new Score(body.email, body.score);
     const scoreResult: boolean = await this.saveScoreUseCase.execute(score);
-    const statusCode = scoreResult ? HttpStatusCode.ACCEPTED : HttpStatusCode.NOT_MODIFIED;
+    const statusCode = scoreResult ? HttpStatusCode.OK : HttpStatusCode.NOT_MODIFIED;
     const response = new ApiGatewayControllerResponse<void>({statusCode});
     return response;
   }
