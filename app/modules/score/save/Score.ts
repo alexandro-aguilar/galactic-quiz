@@ -1,3 +1,5 @@
+import ScoreDto from "./ScoreDto";
+
 export default class Score {
   private email: string;
   private score: number;
@@ -15,7 +17,7 @@ export default class Score {
     return this.score;
   }
 
-  toJson() {
+  toJson(): ScoreDto {
     return {
       email: this.email,
       score: this.score

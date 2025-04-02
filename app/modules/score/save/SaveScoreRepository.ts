@@ -1,18 +1,28 @@
+//Inversion
+import { injectable } from 'inversify';
+//Logging
+import { logMethod } from '@app/core/decorators/logMethod';
+//Storage (DynamoDB)
 import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
-import Score from './Score';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+//Tools
 import Environment from '../../../utils/Environment';
 
-export default class SaveScoreRepository {
+//Domain
+import Score from './Score';
+//Repository
+import Repository from '@app/core/domain/repository/Repository';
+
+@injectable()
+export default class SaveScoreRepository  implements Repository<Score, void> {
   private readonly client: DynamoDBDocumentClient;
 
   constructor() {
     const client = new DynamoDBClient({ region: 'us-east-1' });
     this.client = DynamoDBDocumentClient.from(client);
   }
-
-  async execute(score: Score): Promise<boolean> {
-    try {
+  @logMethod()
+  async execute(score: Score): Promise<void> {
       const command = new UpdateCommand({
         TableName: Environment.UsersTable,
         Key: {
@@ -27,13 +37,5 @@ export default class SaveScoreRepository {
       });
   
       await this.client.send(command);
-      return true;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch(error: any) {
-      if (error.name === 'ConditionalCheckFailedException') {
-        return false;
-      }
-      throw error;
-    }
   }
 }

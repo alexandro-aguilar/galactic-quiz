@@ -1,8 +1,14 @@
-import SaveScoreController from './SaveScoreController';
-import { APIGatewayProxyEventV2 } from 'aws-lambda';
+import 'reflect-metadata';
+import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda';
+import BaseAPIGatewayController from '@app/core/infrastructure/controller/BaseAPIGatewayController';
 
-export const handler = async (event: APIGatewayProxyEventV2) => {
-  const saveScoreController = new SaveScoreController();
+import ScoreDto from './ScoreDto';
+import types from '././types';
+import container from '././container';
+
+
+export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGatewayProxyResultV2> => {
+  const saveScoreController = container.get<BaseAPIGatewayController<ScoreDto>>(types.SaveScoreController);
   const response = await saveScoreController.execute(event);
   return response;
 };
