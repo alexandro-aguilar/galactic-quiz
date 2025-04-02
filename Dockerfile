@@ -1,5 +1,5 @@
 # Imagen base con Node.js (x86_64)
-FROM --platform=linux/amd64 node:22-bullseye
+FROM --platform=linux/arm64 node:22-bullseye
 
 # Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
@@ -22,7 +22,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN pip3 install aws-sam-cli
 
 # Habilitar Yarn con Corepack
-RUN corepack enable && corepack prepare yarn@4 --activate
+RUN corepack enable && corepack prepare yarn@4.7.0 --activate
 
 # Otras herramientas necesarias
 RUN pip3 install awscli-local
