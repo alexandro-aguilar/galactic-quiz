@@ -4,15 +4,24 @@ set -e
 
 LAYERS_DIR="./iac/modules/layers"
 
-echo "🔍 Looking for layers in $LAYERS_DIR..."
+if [ ! -d "$LAYERS_DIR" ]; then
+  echo "❌ Layers directory not found: $LAYERS_DIR"
+  exit 1
+fi
+
+echo "🔍 Scanning layers in $LAYERS_DIR..."
 
 for layer in "$LAYERS_DIR"/*; do
-  if [ -d "$layer/nodejs" ]; then
-    echo "📦 Building layer: $(basename "$layer")"
-    (cd "$layer" && yarn workspaces focus --production)
+  if [ -d "$layer" ]; then
+    NODEJS_DIR="$layer/layer/nodejs"
+
+    if [ -d "$NODEJS_DIR" ]; then
+      echo "📦 Installing production dependencies for layer: $(basename "$layer")"
+      (cd "$layer/layer/nodejs" && yarn workspaces focus --production)
+    fi
   else
-    echo "⚠️ Skipping $(basename "$layer") — no nodejs folder"
+    echo "⏭️ Skipping non-directory item: $(basename "$layer")"
   fi
 done
 
-echo "✅ All applicable layers have been built." 
+echo "✅ Layer preparation complete."

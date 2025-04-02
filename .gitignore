@@ -6,16 +6,15 @@
 !jest.unit.config.js
 !jest.setup.js
 *.d.ts
-node_modules/
+**/node_modules/
 coverage/
 
 # CDK asset staging directory
 .cdk.staging
 cdk.out
 .env
-.yarn/*
+**/.yarn/*
 .devcontainer/.volumes/*
 .DS_Store
-iac/modules/layers/**/layer
 devcontainer
 .dist

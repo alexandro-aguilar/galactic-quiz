@@ -10,7 +10,9 @@ export function logMethod(): MethodDecorator {
 
     descriptor.value = async function (...args: unknown[]) {
       const methodName = propertyKey.toString();
-      logger.info(`→ Entering ${methodName}`, { arguments: args });
+      const className =
+        target.constructor?.name || (target as any).name || 'UnknownClass';
+      logger.info(`→ Entering ${className}.${methodName}`, { arguments: args });
 
       try {
         const result = await originalMethod.apply(this, args);
