@@ -6,4 +6,5 @@ export default class Environment {
   static readonly UsersTable = process.env.USERS_TABLE ?? 'default';
   static readonly LogLevel = process.env.LOG_LEVEL as keyof typeof LogLevel ?? LogLevel.DEBUG;
   static readonly PowertoolsServiceName = process.env.POWERTOOLS_SERVICE_NAME ?? 'default-service';
+  static readonly LocalEndpoint = process.env.LOCAL_ENDPOINT;
 }
