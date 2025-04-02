@@ -1,15 +1,9 @@
 // .devcontainer/devcontainer.json
 {
 	"name": "Localstack + Node Devcontainer",
-	"remoteEnv": {
-		"DOTENV_PATH": "../.env"
-	},
-	"dockerComposeFile": "../docker-compose.yml",
+	"dockerComposeFile": "docker-compose.yml",
   	"service": "devcontainer",
 	"workspaceFolder": "/workspaces/app",
-	// "forwardPorts": [
-	// 	3000
-	// ],
 	"customizations": {
 		"vscode": {
 			"settings": {
@@ -17,7 +11,7 @@
 			}
 		}
 	},
-	"postCreateCommand": "socat TCP-LISTEN:4566,reuseaddr,fork TCP:localstack:4566 && disown",
+	"postCreateCommand": "git config --global user.email \"$GIT_EMAIL\" && git config --global user.name \"$GIT_USERNAME\" && socat TCP-LISTEN:4566,reuseaddr,fork TCP:localstack:4566 && disown",
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind"
 	],

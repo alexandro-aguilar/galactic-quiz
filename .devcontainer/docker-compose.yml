@@ -1,16 +1,12 @@
 services:
   devcontainer:
     build:
-      context: .
-      dockerfile: Dockerfile
-    
-    environment:
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}
-    
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    env_file:
+      - ../.env
     volumes:
-      - .:/workspaces/app:cached
+      - ..:/workspaces/app:cached
     depends_on:
      - localstack
     networks:
