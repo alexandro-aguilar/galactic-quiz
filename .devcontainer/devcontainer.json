@@ -11,9 +11,12 @@
 			}
 		}
 	},
-	"postCreateCommand": "git config --global user.email \"$GIT_EMAIL\" && git config --global user.name \"$GIT_USERNAME\" && socat TCP-LISTEN:4566,reuseaddr,fork TCP:localstack:4566 && disown",
+	"postCreateCommand": "git config --global user.email \"$GIT_EMAIL\" && git config --global user.name \"$GIT_USERNAME\"",
 	"mounts": [
 		"source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind"
 	],
+	"remoteEnv": {
+		"AWS_PROFILE": "local"
+	},
 	"remoteUser": "root"
 }

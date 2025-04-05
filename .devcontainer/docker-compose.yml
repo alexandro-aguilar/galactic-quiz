@@ -5,6 +5,10 @@ services:
       dockerfile: .devcontainer/Dockerfile
     env_file:
       - ../.env
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-test}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-test}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
     volumes:
       - ..:/workspaces/app:cached
     depends_on:
@@ -19,13 +23,15 @@ services:
     ports:
       - "4566:4566"            # Puerto principal de LocalStack
       - "4510-4559:4510-4559"  # Rango de puertos para servicios externos
+    env_file:
+      - ../.env 
     environment:
       # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
       - DEBUG=${LOCALSTACK_DEBUG:-0}
       - PERSISTENCE=true
       - STATE_DIR=/tmp/localstack_state
-      - LOCALSTACK_AUTH_TOKEN=${LOCALSTACK_AUTH_TOKEN}
-      - DEFAULT_REGION=us-east-1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - AWS_REGION=${AWS_REGION:-us-east-1}
     volumes:
       #lets this config as is, requiered for localstack to communicate with docker
       - /var/run/docker.sock:/var/run/docker.sock
