@@ -1,7 +1,7 @@
 import User from './User';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand, DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
-import Environment from '../../../utils/Environment';
+import Environment from '../../../../utils/Environment';
 import Repository from '@app/core/domain/repository/Repository';
 import { injectable } from 'inversify';
 import UserAlreadyExistsError from './UserAlreadyExistsError';
@@ -19,7 +19,7 @@ export default class RegisterUserRepository implements Repository<User, void> {
   @logMethod()
   async execute(user: User): Promise<void> {
     const params = {
-      TableName: Environment.UsersTable,
+      TableName: Environment.UserTable,
       Item: user.toJSON(),
       ConditionExpression: 'attribute_not_exists(email)' // Prevent overwriting
     };

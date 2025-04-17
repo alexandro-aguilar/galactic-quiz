@@ -2,7 +2,7 @@ import { handler } from '@app/modules/user/register/RegisterUserHandler';
 import { fixtures } from './fixtures';
 import { APIGatewayProxyEventV2, APIGatewayProxyStructuredResultV2 } from 'aws-lambda';
 import { DeleteItemCommand, DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import Environment from '@app/utils/Environment';
+import Environment from '@app/../utils/Environment';
 
 describe('RegisterUser - Integration', () => {
 
@@ -25,8 +25,8 @@ afterAll(async () => {
 });
 
 // Setup DynamoDB client
-const ddbClient = new DynamoDBClient({ region: Environment.AWSRegion });
-const tableName = Environment.UsersTable;
+const ddbClient = new DynamoDBClient({ region: 'us-east-1', endpoint: Environment.LocalEndpoint });
+const tableName = Environment.UserTable;
 
 // Teardown logic to delete created test users by email
 async function teardownDynamoTestItems() {

@@ -2,6 +2,7 @@ import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedroc
 import Question from './Question';
 import Quiz from './Quiz';
 import { logMethod } from '@app/core/decorators/logMethod';
+import Environment from '@app/../utils/Environment';
 
 
 export default class ParaphraseRepository {
@@ -9,7 +10,7 @@ export default class ParaphraseRepository {
   private readonly modelId = 'anthropic.claude-v2';
 
   constructor() {
-    this.bedrockClient = new BedrockRuntimeClient({ region: 'us-east-1' })
+    this.bedrockClient = new BedrockRuntimeClient({ region: 'us-east-1', endpoint: Environment.LocalEndpoint  })
   }
 
   @logMethod()

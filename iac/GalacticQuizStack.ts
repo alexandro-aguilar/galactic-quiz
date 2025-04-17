@@ -1,38 +1,40 @@
 import { Construct } from 'constructs';
 import { QuizStack } from './modules/lambda/quiz/QuizStack';
 import { Role, ServicePrincipal, ManagedPolicy } from 'aws-cdk-lib/aws-iam';
-import { UserStack } from './modules/lambda/users/UsersStack';
+import { UserStack } from './modules/lambda/user/UsersStack';
 import { ScoreStack } from './modules/lambda/score/ScoreStack';
 import GalacticQuizAPIGatewayStack from './modules/apigateway/GalacticQuizAPIGatewayStack';
 import LambdaStackProps from './utils/LambdaStackProps';
 import GalacticQuizUsersDynamoStack from './modules/dynamoDB/GalacticQuizUsersDynamoStack';
 import GalacticQuizQuestionsBucketStack from './modules/s3/GalacticQuizQuestionsBucketStack';
 import { Stack, StackProps, Tags } from 'aws-cdk-lib';
-import Environment from './utils/Environment';
+import Environment from '../utils/Environment';
 import LayersStack from './modules/layers/LayersStack';
 
 export default class GalacticQuizStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
-    super(scope, id, props);
+  constructor(scope: Construct, prefix: string, stackId: string, props?: StackProps) {
+    super(scope, stackId, props);
 
-    const role = new Role(this, 'LambdaExecutionRole', {
-      roleName: `GalacticQuizLambdaExecutionRole-${Environment.projectName}-${Environment.stage}`,
+    const roleName = `${prefix}-LambdaExecutionRole`
+    const role = new Role(this, `${roleName}-id`, {
+      roleName,
       assumedBy: new ServicePrincipal('lambda.amazonaws.com'),
       managedPolicies: [
         ManagedPolicy.fromAwsManagedPolicyName('service-role/AWSLambdaBasicExecutionRole'),
       ],
     });
 
-    const apiGatewayStack = new GalacticQuizAPIGatewayStack(this, {});
+    const apiGatewayStack = new GalacticQuizAPIGatewayStack(this, prefix, {});
     const api = apiGatewayStack.api;
 
-    const galacticQuizUsersDynamoStack = new GalacticQuizUsersDynamoStack(this, {});
+    const galacticQuizUsersDynamoStack = new GalacticQuizUsersDynamoStack( this, prefix, {});
     const table = galacticQuizUsersDynamoStack.table;
+    console.log("-- galacticQuizUsersDynamoStack.table", galacticQuizUsersDynamoStack.table)
 
-    const comDayQuestionsBucketStack = new GalacticQuizQuestionsBucketStack(this, {});
+    const comDayQuestionsBucketStack = new GalacticQuizQuestionsBucketStack(this,prefix,  {});
     const bucket = comDayQuestionsBucketStack.bucket;
 
-    const layerStack = new LayersStack(this, {});
+    const layerStack = new LayersStack(this, prefix,  {});
 
     const commonLayer = layerStack.commonLayer;
 
@@ -44,14 +46,18 @@ export default class GalacticQuizStack extends Stack {
       layer: commonLayer
     }
 
-    new QuizStack(this, lambdaStackProps);
+    // console.log("-- lambdaStackProps", lambdaStackProps)
 
-    new UserStack(this, lambdaStackProps);
+    new QuizStack(this, prefix, lambdaStackProps);
+    new ScoreStack(this, prefix, lambdaStackProps);
+    new UserStack(this, prefix, lambdaStackProps);
 
-    new ScoreStack(this, lambdaStackProps);
 
 
-    Tags.of(this).add('project', Environment.projectName);
-    Tags.of(this).add('environment', Environment.stage);
+    Tags.of(this).add('project', Environment.ProjectName);
+    Tags.of(this).add('environment', Environment.Stage);
+    Tags.of(this).add('owner', Environment.Owner);
+    Tags.of(this).add('team', Environment.Team);
+    Tags.of(this).add('client', Environment.Client);
   }
 }

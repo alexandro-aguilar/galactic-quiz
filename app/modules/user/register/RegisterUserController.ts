@@ -26,7 +26,7 @@ export default class RegisterUserController extends BaseAPIGatewayController<voi
     const body: UserDto = JSON.parse(event.body as string);
     const user = new User(body.email, body.practice, body.name);
     const registrationResult: boolean = await this.registerUserUseCase.execute(user);
-    const statusCode = registrationResult ? HttpStatusCode.CREATED : HttpStatusCode.OK;
+    const statusCode = registrationResult ? HttpStatusCode.CREATED : HttpStatusCode.ALREADY_REPORTED;
     const response = new ApiGatewayControllerResponse<void>({statusCode});
     return response;
   }

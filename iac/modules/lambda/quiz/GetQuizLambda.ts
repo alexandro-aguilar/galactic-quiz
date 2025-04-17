@@ -8,14 +8,14 @@ import { Construct } from 'constructs';
 import { Duration } from 'aws-cdk-lib';
 import LambdaStackProps from '../../../utils/LambdaStackProps';
 import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
-import Environment from '../../../utils/Environment';
+import Environment from '../../../../utils/Environment';
 
 export class GetQuizLambda extends NodejsFunction {
   private readonly name;
 
-  constructor(scope: Construct, props: LambdaStackProps) {
-    super(scope, `GetQuizLambda`, {
-      functionName: `GetQuizLambda-${Environment.projectName}-${Environment.stage}`,
+  constructor(scope: Construct, prefix: string, props: LambdaStackProps) {
+    super(scope, `${prefix}-GetQuizLambdaStack`, {
+      functionName: `${prefix}-GetQuizLambda`,
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/quiz/get/GetQuizHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
@@ -28,8 +28,8 @@ export class GetQuizLambda extends NodejsFunction {
       environment: {
         QUIZ_BUCKET: props.bucket.bucketName,
         POWERTOOLS_SERVICE_NAME: 'GetQuizLambda',
-        POWERTOOLS_LOG_LEVEL: Environment.logLevel,
-        POWERTOOLS_METRICS_NAMESPACE: Environment.projectName,
+        POWERTOOLS_LOG_LEVEL: Environment.LogLevel,
+        POWERTOOLS_METRICS_NAMESPACE: Environment.ProjectName,
       },
       bundling: esbuildBundlingConfig,
     });

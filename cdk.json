@@ -16,16 +16,8 @@
       "test"
     ]
   },
+  
   "context": {
-    
-    "aws-cdk:enable-endpoint-overrides": true,
-    "aws-cdk:enable-asset-staging": true,
-
-    "aws-cdk:asset-publishing:use-s3": false,
-    "aws-cdk:assets-s3-force-path-style": true,
-    "aws-cdk:custom-s3-endpoint": "http://localstack:4566",
-    "aws-cdk:enableDiffNoFail": "true",
-
     "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
     "@aws-cdk/core:checkSecretUsage": true,
     "@aws-cdk/core:target-partitions": [

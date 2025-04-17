@@ -7,15 +7,15 @@ import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import LambdaStackProps from '../../../utils/LambdaStackProps';
 import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
-import Environment from '../../../utils/Environment';
+import Environment from '../../../../utils/Environment';
 
 
 export default class RegisterUserLambda extends NodejsFunction {
   private readonly name;
 
-  constructor(scope: Construct, props: LambdaStackProps) {
+  constructor(scope: Construct, prefix: string, props: LambdaStackProps) {
     super(scope, `RegisterUserLambda`, {
-      functionName: `RegisterUserLambda-${Environment.projectName}-${Environment.stage}`,
+      functionName: `${prefix}-RegisterUserLambda`,
       runtime: Runtime.NODEJS_22_X,
       entry: join(__dirname, '../../../../app/modules/user/register/RegisterUserHandler.ts'),
       handler: 'handler', // Name of the exported handler function,
@@ -24,10 +24,13 @@ export default class RegisterUserLambda extends NodejsFunction {
       architecture: Architecture.ARM_64,
       role: props.role,
       environment: {
-        USERS_TABLE: props.table.tableName,
+         //ToDo: @alexandro, can we use the env variabble instead props, wich one is better to use?
+        //USER_TABLE: Environment.UserTable,
+
+        USER_TABLE: props.table.tableName,
         POWERTOOLS_SERVICE_NAME: 'RegisterUserLambda',
-        POWERTOOLS_LOG_LEVEL: Environment.logLevel,
-        POWERTOOLS_METRICS_NAMESPACE: Environment.projectName,
+        POWERTOOLS_LOG_LEVEL: Environment.LogLevel,
+        POWERTOOLS_METRICS_NAMESPACE: Environment.ProjectName,
       },
       bundling: esbuildBundlingConfig,
     });

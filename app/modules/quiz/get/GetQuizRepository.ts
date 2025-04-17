@@ -1,7 +1,7 @@
 import Quiz from './Quiz';
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import QuizQuestionsDTO from './QuizQuestionsDTO';
-import Environment from '../../../utils/Environment';
+import Environment from '../../../../utils/Environment';
 import { injectable } from 'inversify';
 import Repository from '@app/core/domain/repository/Repository';
 import { logMethod } from '@app/core/decorators/logMethod';
@@ -13,7 +13,11 @@ export default class GetQuizRepository implements Repository<number, Quiz> {
   private readonly bucket: string;
 
   constructor() {
-    this.client = new S3Client({ region: 'us-east-1' });
+    this.client = new S3Client({ 
+      region: Environment.Region, 
+      endpoint: Environment.LocalEndpoint ,
+      forcePathStyle: Environment.ForceS3PathStyle,
+     });
     this.bucket = Environment.QuizBucket;
   }
 

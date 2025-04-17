@@ -15,11 +15,10 @@ import HttpStatusCode from '../../../core/infrastructure/enum/httpStatusCode';
 
 //Domain
 import Score from './Score';
-import SaveScoreRepository from './SaveScoreRepository';
 import ScoreDto from './ScoreDto';
 
 @injectable()
-export default class RegisterUserController extends BaseAPIGatewayController<void> {
+export default class SaveScoreController extends BaseAPIGatewayController<void> {
   constructor(
     @inject(types.ResponseMapper) responseMapper: BaseMapper<ApiGatewayControllerResponse<void>, APIGatewayProxyResultV2>,
     @inject(types.SaveScoreUseCase) private readonly saveScoreUseCase: UseCase<Score, Promise<boolean>>

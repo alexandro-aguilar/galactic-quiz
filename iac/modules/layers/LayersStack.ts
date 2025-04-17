@@ -7,8 +7,9 @@ import { execSync } from 'child_process';
 
 export default class CommonLayerStack extends NestedStack {
   private _commonLayer: LayerVersion;
-  constructor(scope: Construct, props?: StackProps) {
-    super(scope, 'GalacticQuizLayersStack', props);
+  constructor( scope: Construct, prefix: string, props?: StackProps) {
+    super(scope, `${prefix}-CommonLayersStack`, props);
+
     const scriptPath = join(__dirname, '../../..', 'scripts', 'build-layers.sh');
 
     try {
@@ -17,7 +18,7 @@ export default class CommonLayerStack extends NestedStack {
       console.error('Error executing bash script:', error);
     }
 
-    this._commonLayer = new CommonLayer(this, 'CommonLayer');
+    this._commonLayer = new CommonLayer(this, `${prefix}-CommonLayer`);
   }
 
   get commonLayer(): LayerVersion {

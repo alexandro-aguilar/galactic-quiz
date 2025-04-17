@@ -1,5 +1,5 @@
 // utils/logger.ts
-import Environment from '@app/utils/Environment';
+import Environment from '../../../utils/Environment';
 import { Logger } from '@aws-lambda-powertools/logger';
 
 export default class LoggerSingleton {
