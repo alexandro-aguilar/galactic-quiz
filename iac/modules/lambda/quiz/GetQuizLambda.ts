@@ -1,12 +1,12 @@
 import { resolve } from 'path';
-import { Architecture, Runtime, Tracing, Function, Code } from 'aws-cdk-lib/aws-lambda';
+import { Duration } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import Environment from '../../../../utils/Environment';
 import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import LambdaStackProps from '../../../utils/LambdaStackProps';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
-import { Construct } from 'constructs';
-import { Duration } from 'aws-cdk-lib';
-import LambdaStackProps from '../../../utils/LambdaStackProps';
-import Environment from '../../../../utils/Environment';
+import { Architecture, Runtime, Tracing, Function, Code } from 'aws-cdk-lib/aws-lambda';
 
 export class GetQuizLambda extends Function {
   private readonly name;

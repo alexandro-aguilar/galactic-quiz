@@ -1,22 +1,20 @@
-import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
-import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { Runtime, Architecture, Tracing } from 'aws-cdk-lib/aws-lambda';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { resolve } from 'path';
 import { Construct } from 'constructs';
-import { join } from 'path';
-import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
-import LambdaStackProps from '../../../utils/LambdaStackProps';
 import Environment from '../../../../utils/Environment';
+import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import LambdaStackProps from '../../../utils/LambdaStackProps';
+import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
+import { Runtime, Architecture, Tracing, Function, Code } from 'aws-cdk-lib/aws-lambda';
 
-export default class SaveScoreLambda extends NodejsFunction {
+export default class SaveScoreLambda extends Function {
   private readonly name;
 
   constructor(scope: Construct,prefix: string, props: LambdaStackProps) {
     super(scope, `SaveScoreLambda`, {
       functionName: `${prefix}-SaveScoreLambda`,
       runtime: Runtime.NODEJS_22_X,
-      entry: join(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts'),
+      code: Code.fromAsset(resolve(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts')),
       handler: 'handler', // Name of the exported handler function,
       layers: [props.layer],
       memorySize: 1024,
@@ -32,7 +30,6 @@ export default class SaveScoreLambda extends NodejsFunction {
         POWERTOOLS_LOG_LEVEL: Environment.LogLevel,
         POWERTOOLS_METRICS_NAMESPACE: Environment.ProjectName,
       },
-      bundling: esbuildBundlingConfig,
     });
     this.name = 'SaveScore';
     // Create an inline policy for DynamoDB PutItem access

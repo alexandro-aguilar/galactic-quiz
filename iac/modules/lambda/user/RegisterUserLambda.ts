@@ -1,23 +1,20 @@
-import { join } from 'path';
+import { resolve } from 'path';
 import { Construct } from 'constructs';
-import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { Runtime, Architecture } from 'aws-cdk-lib/aws-lambda';
-import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
-import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import LambdaStackProps from '../../../utils/LambdaStackProps';
-import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
 import Environment from '../../../../utils/Environment';
+import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import LambdaStackProps from '../../../utils/LambdaStackProps';
+import { Runtime, Architecture, Code, Function } from 'aws-cdk-lib/aws-lambda';
+import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 
-
-export default class RegisterUserLambda extends NodejsFunction {
+export default class RegisterUserLambda extends Function {
   private readonly name;
 
   constructor(scope: Construct, prefix: string, props: LambdaStackProps) {
     super(scope, `RegisterUserLambda`, {
       functionName: `${prefix}-RegisterUserLambda`,
       runtime: Runtime.NODEJS_22_X,
-      entry: join(__dirname, '../../../../app/modules/user/register/RegisterUserHandler.ts'),
+      code: Code.fromAsset(resolve(__dirname, '../../../../app/modules/user/register/RegisterUserHandler.ts')),
       handler: 'handler', // Name of the exported handler function,
       layers: [props.layer],
       memorySize: 1024,
@@ -32,7 +29,6 @@ export default class RegisterUserLambda extends NodejsFunction {
         POWERTOOLS_LOG_LEVEL: Environment.LogLevel,
         POWERTOOLS_METRICS_NAMESPACE: Environment.ProjectName,
       },
-      bundling: esbuildBundlingConfig,
     });
     this.name = 'RegisterUser';
 
