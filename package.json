@@ -27,6 +27,7 @@
     "aws-cdk": "2.1004.0",
     "aws-cdk-lib": "2.184.1",
     "aws-cdk-local": "^2.19.2",
+    "chokidar": "^4.0.3",
     "constructs": "^10.4.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",

@@ -4,6 +4,7 @@ const { nodeExternalsPlugin } = require('esbuild-node-externals');
 const alias = require('esbuild-plugin-alias');
 const { resolve } = require('path');
 const fg = require('fast-glob');
+const chokidar = require('chokidar');
 
 async function main() {
   const entryPoints = await fg('app/**/*Handler.ts');
@@ -40,7 +41,11 @@ async function main() {
     if (isWatchMode) {
       const ctx = await context(buildOptions);
       await ctx.watch();
-      console.log('👀 Watching for changes...');
+      chokidar.watch('app/**/*').on('change', async (filePath) => {
+        console.log(`🔄 File changed: ${filePath}`);
+        await ctx.rebuild();
+        console.log('✅ Rebuild complete');
+      });
     } else {
       await build(buildOptions);
       console.log('✅ TypeScript build successful');
