@@ -12,7 +12,7 @@ services:
     volumes:
       - ..:/workspaces/app:cached
     depends_on:
-     - localstack
+      - localstack
     networks:
       - app-network
     command: sleep infinity

@@ -4849,7 +4849,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.3.2":
+"fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -5110,6 +5110,7 @@ __metadata:
     dotenv: "npm:^16.4.7"
     esbuild: "npm:^0.25.1"
     eslint: "npm:^9.22.0"
+    fast-glob: "npm:^3.3.3"
     globals: "npm:^16.0.0"
     husky: "npm:^9.1.7"
     inversify: "npm:^7.2.0"
