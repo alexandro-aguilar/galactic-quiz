@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { build, context } = require('esbuild');
-const { nodeExternalsPlugin } = require('esbuild-node-externals');
-const alias = require('esbuild-plugin-alias');
-const { resolve } = require('path');
-const fg = require('fast-glob');
-const chokidar = require('chokidar');
+// @ts-expect-error: context is real but missing from types
+import { build, context } from 'esbuild';
+import { nodeExternalsPlugin } from 'esbuild-node-externals';
+import alias from 'esbuild-plugin-alias';
+import { resolve } from 'path';
+import fg from 'fast-glob';
+import chokidar from 'chokidar';
 
 async function main() {
   const entryPoints = await fg('app/**/*Handler.ts');
