@@ -34,7 +34,6 @@ async function main() {
         '@root': resolve(__dirname, '.'),
       })
     ],
-    // ❌ DO NOT put `watch` here anymore
   };
 
   try {
