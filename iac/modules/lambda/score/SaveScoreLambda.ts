@@ -14,7 +14,7 @@ export default class SaveScoreLambda extends Function {
     super(scope, `SaveScoreLambda`, {
       functionName: `${prefix}-SaveScoreLambda`,
       runtime: Runtime.NODEJS_22_X,
-      code: Code.fromAsset(resolve(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.ts')),
+      code: Code.fromAsset(resolve(__dirname, '../../../../app/modules/score/save/SaveScoreHandler.js')),
       handler: 'handler', // Name of the exported handler function,
       layers: [props.layer],
       memorySize: 1024,

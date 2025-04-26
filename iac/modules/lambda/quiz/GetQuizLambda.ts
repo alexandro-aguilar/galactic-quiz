@@ -15,7 +15,7 @@ export class GetQuizLambda extends Function {
     super(scope, `${prefix}-GetQuizLambdaStack`, {
       functionName: `${prefix}-GetQuizLambda`,
       runtime: Runtime.NODEJS_22_X,
-      code: Code.fromAsset(resolve(__dirname, '../../../../.dist/app/modules/quiz/get/GetQuizHandler.ts')),
+      code: Code.fromAsset(resolve(__dirname, '../../../../.dist/app/modules/quiz/get/GetQuizHandler.js')),
       handler: 'handler', // Name of the exported handler function,
       layers: [props.layer],
       memorySize: 1024,
