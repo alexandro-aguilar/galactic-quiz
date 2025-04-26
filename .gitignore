@@ -5,6 +5,7 @@
 !jest.integration.config.js
 !jest.unit.config.js
 !jest.setup.js
+!esbuild.js
 *.d.ts
 **/node_modules/
 coverage/
