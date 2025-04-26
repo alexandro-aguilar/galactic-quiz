@@ -1,23 +1,21 @@
-import { join } from 'path';
-import { Architecture, Runtime, Tracing } from 'aws-cdk-lib/aws-lambda';
-import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { resolve } from 'path';
+import { Architecture, Runtime, Tracing, Function, Code } from 'aws-cdk-lib/aws-lambda';
 import { Policy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { HttpMethod, HttpRoute, HttpRouteKey } from 'aws-cdk-lib/aws-apigatewayv2';
 import { Construct } from 'constructs';
 import { Duration } from 'aws-cdk-lib';
 import LambdaStackProps from '../../../utils/LambdaStackProps';
-import esbuildBundlingConfig from '../../../utils/esbuildBundlingConfig';
 import Environment from '../../../../utils/Environment';
 
-export class GetQuizLambda extends NodejsFunction {
+export class GetQuizLambda extends Function {
   private readonly name;
 
   constructor(scope: Construct, prefix: string, props: LambdaStackProps) {
     super(scope, `${prefix}-GetQuizLambdaStack`, {
       functionName: `${prefix}-GetQuizLambda`,
       runtime: Runtime.NODEJS_22_X,
-      entry: join(__dirname, '../../../../app/modules/quiz/get/GetQuizHandler.ts'),
+      code: Code.fromAsset(resolve(__dirname, '../../../../.dist/app/modules/quiz/get/GetQuizHandler.ts')),
       handler: 'handler', // Name of the exported handler function,
       layers: [props.layer],
       memorySize: 1024,
@@ -31,7 +29,6 @@ export class GetQuizLambda extends NodejsFunction {
         POWERTOOLS_LOG_LEVEL: Environment.LogLevel,
         POWERTOOLS_METRICS_NAMESPACE: Environment.ProjectName,
       },
-      bundling: esbuildBundlingConfig,
     });
     this.name = 'GetQuiz';
 
