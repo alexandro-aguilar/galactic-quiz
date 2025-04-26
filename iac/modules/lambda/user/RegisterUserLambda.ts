@@ -14,14 +14,14 @@ export default class RegisterUserLambda extends Function {
     super(scope, `RegisterUserLambda`, {
       functionName: `${prefix}-RegisterUserLambda`,
       runtime: Runtime.NODEJS_22_X,
-      code: Code.fromAsset(resolve(__dirname, '../../../../app/modules/user/register/RegisterUserHandler.js')),
+      code: Code.fromAsset(resolve(__dirname, '../../../../app/modules/user/register')),
       handler: 'handler', // Name of the exported handler function,
       layers: [props.layer],
       memorySize: 1024,
       architecture: Architecture.ARM_64,
       role: props.role,
       environment: {
-         //ToDo: @alexandro, can we use the env variabble instead props, wich one is better to use?
+         //ToDo: @alexandro, can we use the env variable instead props, which one is better to use?
         //USER_TABLE: Environment.UserTable,
 
         USER_TABLE: props.table.tableName,
