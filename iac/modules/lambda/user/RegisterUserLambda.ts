@@ -14,7 +14,7 @@ export default class RegisterUserLambda extends Function {
     super(scope, `RegisterUserLambda`, {
       functionName: `${prefix}-RegisterUserLambda`,
       runtime: Runtime.NODEJS_22_X,
-      code: Code.fromAsset(resolve(__dirname, '../../../../app/modules/user/register')),
+      code: Code.fromAsset(resolve(__dirname, '../../../../.dist/app/modules/user/register')),
       handler: 'handler', // Name of the exported handler function,
       layers: [props.layer],
       memorySize: 1024,
