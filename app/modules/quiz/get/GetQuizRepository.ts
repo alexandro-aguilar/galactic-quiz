@@ -17,7 +17,7 @@ export default class GetQuizRepository implements Repository<number, Quiz> {
       region: Environment.Region, 
       endpoint: Environment.LocalEndpoint ,
       forcePathStyle: Environment.ForceS3PathStyle,
-     });
+    });
     this.bucket = Environment.QuizBucket;
   }
 
