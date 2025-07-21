@@ -9,9 +9,10 @@
     "test:unit": "jest --config jest.unit.config.js",
     "cdk": "cdk",
     "dev": "rm -rf ./cdk.out && cdk synth && sam local start-api -t ./cdk.out/app-local.template.json",
-    "deploy:local": "yarn cdklocal deploy --verbose",
+    "deploy:local": "rm -rf cdk.out/ && yarn cdklocal deploy --verbose --no-staging",
     "destroy:local": "yarn cdklocal destroy --verbose",
-    "synth": "yarn cdklocal synth --verbose",
+    "synth:local": "rm -rf cdk.out/ && yarn cdklocal synth --verbose --no-staging",
+    "synth": "rm -rf cdk.out/ && yarn cdk synth --verbose",
     "bootstrap:local": "yarn cdklocal bootstrap --verbose"
   },
   "devDependencies": {

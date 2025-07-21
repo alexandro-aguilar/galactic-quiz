@@ -3,7 +3,7 @@ import { NestedStack, RemovalPolicy, StackProps } from 'aws-cdk-lib';
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { Construct } from 'constructs';
-import { join } from 'path';
+import { resolve } from 'path';
 
 
 export default class GalacticQuizQuestionsBucketStack extends NestedStack {
@@ -18,12 +18,11 @@ export default class GalacticQuizQuestionsBucketStack extends NestedStack {
       versioned: true,
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       removalPolicy: RemovalPolicy.DESTROY,
-      autoDeleteObjects: true,
       
     });
-
+    // console.log('S3 files', resolve(__dirname, './files'))
     new BucketDeployment(this, 'DeployFiles', {
-      sources: [Source.asset(join(__dirname, './files'))], // Path to your local files
+      sources: [Source.asset(resolve(__dirname, './files'))], // Path to your local files
       destinationBucket: this.bucket,
     });
   }
